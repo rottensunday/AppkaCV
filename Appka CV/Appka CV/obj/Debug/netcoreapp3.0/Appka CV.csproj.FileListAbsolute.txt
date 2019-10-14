@@ -1,0 +1,18 @@
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\appsettings.Development.json
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\appsettings.json
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.exe
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.deps.json
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.runtimeconfig.json
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.runtimeconfig.dev.json
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.dll
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.pdb
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.csprojAssemblyReference.cache
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\staticwebassets\Appka CV.StaticWebAssets.Manifest.cache
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\staticwebassets\Appka CV.StaticWebAssets.xml
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.MvcApplicationPartsAssemblyInfo.cache
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.AssemblyInfoInputs.cache
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.AssemblyInfo.cs
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.RazorTargetAssemblyInfo.cache
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.dll
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.pdb
