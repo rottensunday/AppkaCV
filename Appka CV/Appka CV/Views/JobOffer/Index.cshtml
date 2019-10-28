@@ -1,0 +1,12 @@
+﻿@model List<JobOffer>
+@{
+    ViewData["Title"] = "dupal";
+}
+<ul>
+
+    @foreach (JobOffer offer in Model)
+    {
+        @*<li>@Html.ActionLink(offer.JobTitle, "Details", "JobOffer", offer.Id)</li>*@
+        <li><a asp-action="Details" asp-route-id="@offer.Id">@offer.JobTitle</a></li>
+    }
+</ul>

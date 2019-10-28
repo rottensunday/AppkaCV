@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Company>
+@{
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="AddCompany" method="get">
+    <input type="submit" value="Dodaj firmę" style="margin-top: 100px; margin-left: 120px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
+        height: 40px; color: white; font-weight: bold;" />
+</form>
+
+<div class="hrlist">
+    @foreach(Company company in Model)
+    {
+    <div class="firmacard">
+        <div class="hrnapis">--</div>
+        <div class="hrdane">
+            <div class="hruser">@company.Name</div>
+            <div class="hrid">id firmy: @company.Id</div>
+        </div>
+        <a class="firmamodyfikuj" asp-action="AddCompany" asp-route-companyId="@company.Id">Zmień</a>
+        <form style="right: 10px; bottom: 40px; grid-column: 3; position: relative;" asp-action="DeleteCompany" method="post">
+            <input type="hidden" name="ID" value="@company.Id" />
+            <button type="submit" class="firmausun" style="cursor: pointer;">Usuń</button>
+        </form>
+    </div>
+    }
+</div>

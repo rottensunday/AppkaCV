@@ -1,0 +1,23 @@
+﻿<html>
+<head>
+    <title>Hejka</title>
+    <link rel="stylesheet" type="text/css" href="~/styles.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto">
+
+</head>
+<body>
+    <header>
+        <a class="home" asp-controller="JobOffer" asp-action="Index"><img src="~/obrazki/home.png"></a>
+        <a class="przegladajoferty" asp-controller="JobOffer" asp-action="Index">Przeglądaj oferty</a>
+        <div class="przegladajcv">Przeglądaj CV</div>
+
+        <div class="headerline"></div>
+        <a class="paneladministratora" asp-action="Index"><div class="tekstadministrator">Panel administratora</div></a>
+        <div class="witaj">Witaj, <span id="nickname"> Arnachim!</span></div>
+        <div class="user"><img src="~/obrazki/user.png"></div>
+    </header>
+
+    @RenderBody()
+</body>
+</html>
