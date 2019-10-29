@@ -1,12 +1,58 @@
-﻿@model List<JobOffer>
+﻿@model IEnumerable<JobOffer>
 @{
-    ViewData["Title"] = "dupal";
+    Layout = "_AdminLayout";
 }
-<ul>
 
-    @foreach (JobOffer offer in Model)
-    {
-        @*<li>@Html.ActionLink(offer.JobTitle, "Details", "JobOffer", offer.Id)</li>*@
-        <li><a asp-action="Details" asp-route-id="@offer.Id">@offer.JobTitle</a></li>
-    }
-</ul>
+<div style="display: flex; margin-top: 90px; margin-left: 120px; flex-direction: row;">
+    <div class="szukaj">
+        <div class="szukajtextbox">
+            <input type="text" class="szukajka" placeholder="Szukaj...">
+            <button class="searchbutton"><img src="~/obrazki/szukaj.png"></button>
+        </div>
+        <div class="filtrbutton" id="dupal" onclick="myFunction()">
+            <div class="filtrtext">Pokaż filtry</div>
+            <div class="filtrarrow" id="arrow"><img src="~/obrazki/rightarrow.png"></div>
+        </div>
+    </div>
+    <form style="position: relative; margin-left: 80px; margin-top: 9px;" asp-action="AddOffer" method="get">
+        <input type="submit" value="Dodaj ofertę" style="background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
+        height: 40px; color: white; font-weight: bold;" />
+    </form>
+</div>
+
+
+<div class="szukajexpand" id="szukajexpand">
+    <div class="linia"></div>
+    <div class="dziedzina">Dziedzina</div>
+    <input type="text" class="dziedzinatext">
+    <div class="pozycja">Pozycja</div>
+    <input type="text" class="pozycjatext">
+    <div class="miasto">Miasto</div>
+    <input type="text" class="miastotext">
+    <div class="zarobki">Zarobki</div>
+    <input type="text" class="zarobkitext">
+</div>
+
+@if (Model != null)
+{
+    <div class="offerlist">
+        @foreach (JobOffer offer in Model)
+        {
+            <div class="offercard">
+                <div class="logo"><img src="obrazki/gaben.png"></div>
+                <div class="workcontent">
+                    <div class="worktitle">@offer.JobTitle</div>
+                    <div class="firma">@offer.Company.Name</div>
+                    <div class="addressicon"><img src="obrazki/address.png"></div>
+                    <div class="categoryicon"><img src="obrazki/kategoria.png"></div>
+                    <div class="positionicon"><img src="obrazki/pozycja.png"></div>
+                    <div class="cashicon"><img src="obrazki/gotowka.png"></div>
+                    <div class="address">@offer.City</div>
+                    <div class="category">@offer.Category</div>
+                    <div class="position">@offer.Position</div>
+                    <div class="cash">@offer.SalaryFrom</div>
+                </div>
+            </div>
+        }
+    </div>
+}

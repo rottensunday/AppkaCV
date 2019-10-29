@@ -19,8 +19,15 @@ using Appka_CV.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\Views\_ViewImports.cshtml"
+using Appka_CV.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2ba351cf31643dbc62bfa92c12300debeff3bb04", @"/Views/JobOffer/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"80f814a1670ff6bf963a572fa8f5e556a2a3843a", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"992eaee697534c29bbf46c0b3e1c28df7af5a0ac", @"/Views/_ViewImports.cshtml")]
     public class Views_JobOffer_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<JobOffer>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -73,7 +80,7 @@ Write(Model.JobTitle);
 #line hidden
 #nullable disable
             WriteLiteral("</h1>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ba351cf31643dbc62bfa92c12300debeff3bb043871", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ba351cf31643dbc62bfa92c12300debeff3bb044057", async() => {
                 WriteLiteral("<< Back");
             }
             );

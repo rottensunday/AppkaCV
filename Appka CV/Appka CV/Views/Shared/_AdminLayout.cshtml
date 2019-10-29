@@ -16,6 +16,29 @@
         <a class="paneladministratora" asp-action="Index"><div class="tekstadministrator">Panel administratora</div></a>
         <div class="witaj">Witaj, <span id="nickname"> Arnachim!</span></div>
         <div class="user"><img src="~/obrazki/user.png"></div>
+        <script>
+        function myFunction() {
+            var content = document.getElementById("szukajexpand");
+            var arrow = document.getElementById("arrow");
+
+            if (content.style.maxHeight){
+            content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/rightarrow.png\">"
+            } else {
+            content.style.maxHeight = 150 + "px"; arrow.innerHTML = "<img src=\"obrazki/downarrow.png\">"
+            }
+        }
+
+        function myFunction1() {
+            var content = document.getElementById("cvexpand");
+            var arrow = document.getElementById("secondarrow");
+
+            if (content.style.maxHeight){
+            content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/smallarrowright.png\">"
+            } else {
+            content.style.maxHeight = 600 + "px"; arrow.innerHTML = "<img src=\"obrazki/smallarrowdown.png\">"
+            }
+        }
+        </script>
     </header>
 
     @RenderBody()

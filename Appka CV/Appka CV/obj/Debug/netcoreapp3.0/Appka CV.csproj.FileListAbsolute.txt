@@ -127,3 +127,5 @@ D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views
 D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\Index.cshtml.g.cs
 D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\ListCompanies.cshtml.g.cs
 D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\AddCompany.cshtml.g.cs
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\ListUsers.cshtml.g.cs
+D:\Nauka\repos\AppkaCVRepo\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\JobOffer\AddOffer.cshtml.g.cs

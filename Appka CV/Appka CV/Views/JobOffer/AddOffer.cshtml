@@ -1,0 +1,36 @@
+﻿@model JobOfferViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<p style="margin-top: 100px; margin-left: 40px; font-family: Roboto; font-size: 64px; color:white;">Dodaj ofertę</p>
+<div class="cvform" style="grid-template-rows: auto;">
+
+    <form class="cvexpand2" style="grid-row-gap: 30px" asp-action="AddOffer" method="post">
+        <div class="cvline1" style="grid-column: 1 / span 2; margin-top: 20px;"></div>
+        <div class="wyksztalcenie" style="height: 30px;">Firma:</div>
+        <select class="wyksztalcenietext" style="height: 30px; width: 150px;" asp-for="SelectedCompany" asp-items="@(new SelectList(Model.Companies, "Id", "Name"))">
+            <option>Wybierz firmę</option>
+        </select>
+        <div class="umiejetnosci">Tytuł:</div>
+        <input type="text" style="margin-left: 60px; width: 400px;" asp-for="JobOffer.JobTitle" value="@Model.JobOffer.JobTitle">
+        <div class="zainteresowania">Opis:</div>
+        <textarea style="margin-left: 60px; width: 700px; height: 170px;" asp-for="JobOffer.Description" value="@Model.JobOffer.Description"></textarea>
+        <div class="jezyki">Kategoria:</div>
+        <input type="text" style="margin-left: 60px; width: 400px;" asp-for="JobOffer.Category" value="@Model.JobOffer.Category">
+        <div class="adres">Pozycja:</div>
+        <input type="text" style="margin-left: 60px; width: 400px;" asp-for="JobOffer.Position" value="@Model.JobOffer.Position">
+        <div class="adres" style="grid-column: 1; grid-row: 7;">Zarobki:</div>
+        <input type="text" style="margin-left: 60px; width: 400px;" asp-for="JobOffer.SalaryFrom" value="@Model.JobOffer.SalaryFrom">
+        <div class="adres" style="grid-column: 1; grid-row: 8;">Miasto:</div>
+        <input type="text" style="margin-left: 60px; width: 400px;" asp-for="JobOffer.City" value="@Model.JobOffer.City">
+        <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
+        <div class="adres" style="grid-column: 1; grid-row: 10; margin-bottom: 20px;">Logo firmy:</div>
+        <input type="file">
+
+
+        <input type="submit" style="margin-right: 100px; margin-bottom: 50px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
+                    height: 40px; color: white; font-weight: bold; grid-column: 2; justify-self: end; margin-bottom: 20px; margin-right: 20px;" value="Zapisz ofertę"/>
+
+    </form>
+</div>

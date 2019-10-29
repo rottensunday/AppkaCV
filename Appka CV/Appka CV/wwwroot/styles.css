@@ -196,7 +196,7 @@ header
     width: 600px;
     height: 200px;
     margin-left: 57px;
-    margin-top: 100px;;
+    margin-top: 100px;
     border-left: 3px solid #D12FAE;
 
     background: #FFFFFF;
@@ -219,7 +219,6 @@ img
 {
     width: 850px;
     height: 65px;
-    margin-top: 90px;
 
     display: flex;
 
@@ -277,7 +276,7 @@ img
 {
     width: 850px;
     height: 500px;
-
+    margin-left: 120px;
     display: grid;
     grid-template-rows: auto 35px 35px 35px auto;
     grid-template-columns: 100px 230px 100px 230px auto;
@@ -1197,4 +1196,25 @@ grid-row-gap: 45px;
     #FFFFFF;
     grid-template-columns: 120px 280px 142px;
     grid-template-rows: 100%
+}
+
+.offerlist 
+{
+    display: grid;
+    margin-left: 40px;
+    margin-top: 40px;
+    width: 95%;
+    grid-template-columns: repeat(auto-fill, minmax(590px, 1fr));
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-items: center;
+}
+
+.offercard 
+{
+    display: flex;
+    width: 600px;
+    height: 200px;
+    border-left: 3px solid #D12FAE;
+    background: #FFFFFF;
 }
