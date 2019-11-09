@@ -1,0 +1,55 @@
+﻿@model JobApplicationViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "DodajCV";
+}
+
+<p style="margin-top: 100px; margin-left: 20px; font-family: Roboto; font-size: 64px; color:white;">Aplikuj teraz!</p>
+    <form asp-action="AddApplication" method="post">
+        <div class="cvform">
+            <div class="cvstart">
+                <div class="cvtitle">CV</div>
+                <div class="cvsummary2">
+                    <div class="cvtitle2">@Model.JobOffer.JobTitle</div>
+                    <input type="hidden" asp-for="JobOffer.Id" value="@Model.JobOffer.Id" />
+                    <input type="hidden" asp-for="Application.Id" value="@Model.Application.Id" />
+                    <div class="cvimie">Imię kandydata:</div>
+                    <input type="text" style="height: 25px; margin-top: 5px; grid-column: 2;" asp-for="Application.FirstName" value="@Model.Application.FirstName">
+                    <div class="cvnazwisko">Nazwisko kandydata: </div>
+                    <input type="text" style="height: 25px; margin-top: 5px; grid-column: 5;" asp-for="Application.LastName" value="@Model.Application.LastName">
+                </div>
+            </div>
+            <div class="cvexpand2">
+                <div class="cvline1" style="grid-column: 1 / span 2;"></div>
+                <div class="wyksztalcenie" style="height: 30px;">Wyksztalcenie:</div>
+                <select class="wyksztalcenietext" style="height: 30px; width: 150px;" asp-for="Application.Education">
+                    <option value="podstawowe">Podstawowe</option>
+                    <option value="średnie">Średnie</option>
+                    <option value="wyższe">Wyższe</option>
+                </select>
+                <div class="umiejetnosci">Umiejętności:</div>
+                <textarea style="margin-left: 60px; width: 700px; height: 170px;" asp-for="Application.Skills">@Model.Application.Skills</textarea>
+                <div class="zainteresowania">Zainteresowania:</div>
+                <textarea style="margin-left: 60px; width: 700px; height: 170px;" asp-for="Application.Hobbies">@Model.Application.Hobbies</textarea>
+                <div class="jezyki">Znane języki:</div>
+                <textarea style="margin-left: 60px; width: 500px; height: 80px;" asp-for="Application.Languages">@Model.Application.Languages</textarea>
+                <div class="adres">Adres:</div>
+                <input type="text" style="margin-left: 60px; width: 500px;" asp-for="Application.Address" value="@Model.Application.Address">
+                <div class="adres" style="grid-row: 7;">Adres email:</div>
+                <input type="text" style="margin-left: 60px; width: 500px;" asp-for="Application.EmailAddress" value="@Model.Application.EmailAddress">
+                <div class="adres" style="grid-row: 8">Numer telefonu:</div>
+                <input type="text" style="margin-left: 60px; width: 500px;" asp-for="Application.PhoneNumber" value="@Model.Application.PhoneNumber">
+                <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
+                <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
+                <input type="file" style="grid-column: 2;" asp-for="Application.FirstFile">
+                <div class="zalaczoneplikicontent" style="grid-row: 11; margin-bottom: 0px;">
+                    <div class="zalaczonyplik">1. jeden.pdf</div>
+                    <div class="zalaczonyplik">2. dwa.jpg</div>
+                    <div class="zalaczonyplik">3. teksty.pdf</div>
+                </div>
+                <button type="submit" style="grid-column: 2; grid-row: 12; height: 50px; margin-bottom: 10px; margin-right: 20px; justify-self: end; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px; color: white; font-weight: bold;">Dodaj CV</button>
+            </div>
+
+             </div>
+        
+    </form>

@@ -10,10 +10,10 @@
     <header>
         <a class="home" asp-controller="JobOffer" asp-action="Index"><img src="~/obrazki/home.png"></a>
         <a class="przegladajoferty" asp-controller="JobOffer" asp-action="Index">Przeglądaj oferty</a>
-        <div class="przegladajcv">Przeglądaj CV</div>
+        <a class="przegladajcv" asp-controller="Application" asp-action="Index">Przeglądaj CV</a>
 
         <div class="headerline"></div>
-        <a class="paneladministratora" asp-action="Index"><div class="tekstadministrator">Panel administratora</div></a>
+        <a class="paneladministratora" asp-controller="Administrator" asp-action="Index"><div class="tekstadministrator">Panel administratora</div></a>
         <div class="witaj">Witaj, <span id="nickname"> Arnachim!</span></div>
         <div class="user"><img src="~/obrazki/user.png"></div>
         <script>
@@ -28,9 +28,9 @@
             }
         }
 
-        function myFunction1() {
-            var content = document.getElementById("cvexpand");
-            var arrow = document.getElementById("secondarrow");
+        function myFunction1(id, id2) {
+            var content = document.getElementById(id);
+            var arrow = document.getElementById(id2);
 
             if (content.style.maxHeight){
             content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/smallarrowright.png\">"

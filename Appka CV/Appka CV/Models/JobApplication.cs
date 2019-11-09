@@ -11,6 +11,7 @@ namespace Appka_CV.Models
         public JobOffer JobOffer { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Education { get; set; }
         public string Skills { get; set; }
         public string Hobbies { get; set; }
         public string Languages { get; set; }

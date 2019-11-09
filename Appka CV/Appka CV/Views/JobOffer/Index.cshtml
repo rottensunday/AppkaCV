@@ -38,21 +38,22 @@
     <div class="offerlist">
         @foreach (JobOffer offer in Model)
         {
-            <div class="offercard">
-                <div class="logo"><img src="obrazki/gaben.png"></div>
-                <div class="workcontent">
-                    <div class="worktitle">@offer.JobTitle</div>
-                    <div class="firma">@offer.Company.Name</div>
-                    <div class="addressicon"><img src="obrazki/address.png"></div>
-                    <div class="categoryicon"><img src="obrazki/kategoria.png"></div>
-                    <div class="positionicon"><img src="obrazki/pozycja.png"></div>
-                    <div class="cashicon"><img src="obrazki/gotowka.png"></div>
-                    <div class="address">@offer.City</div>
-                    <div class="category">@offer.Category</div>
-                    <div class="position">@offer.Position</div>
-                    <div class="cash">@offer.SalaryFrom</div>
-                </div>
+        <div class="offercard">
+            <div class="logo"><img src="obrazki/gaben.png"></div>
+            <div class="workcontent">
+                <div class="worktitle">@offer.JobTitle</div>
+                <div class="firma">@offer.Company.Name</div>
+                <div class="addressicon"><img src="obrazki/address.png"></div>
+                <div class="categoryicon"><img src="obrazki/kategoria.png"></div>
+                <div class="positionicon"><img src="obrazki/pozycja.png"></div>
+                <div class="cashicon"><img src="obrazki/gotowka.png"></div>
+                <div class="address">@offer.City</div>
+                <div class="category">@offer.Category</div>
+                <div class="position">@offer.Position</div>
+                <div class="cash">@offer.SalaryFrom</div>
             </div>
+            <a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: #3BB55D" asp-action="AddApplication" asp-controller="Application" asp-route-jobOfferId="@offer.Id">Aplikuj</a>
+        </div>
         }
     </div>
 }

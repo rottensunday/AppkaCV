@@ -24,6 +24,7 @@ namespace Appka_CV
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["DatabaseConnectionString"]));
             services.AddTransient<EFCompaniesRepository>();
             services.AddTransient<EFJobOffersRepository>();
+            services.AddTransient<EFApplicationsRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 

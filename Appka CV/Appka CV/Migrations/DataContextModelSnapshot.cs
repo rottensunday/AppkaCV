@@ -47,6 +47,9 @@ namespace Appka_CV.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Education")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
