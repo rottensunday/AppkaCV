@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Appka_CV_API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CompaniesController : ControllerBase
     {
         private DataContext companiesRepository;
@@ -23,13 +23,29 @@ namespace Appka_CV_API.Controllers
         {
             IQueryable<Company> result = from s in companiesRepository.Companies
                                              select s;
+            int id;
+            bool parsingSuccess = Int32.TryParse(filter, out id);
             if (!String.IsNullOrEmpty(filter))
             {
-                result = result.Where(s => s.Name.Contains(filter));
+                result = result.Where(s => s.Name.Contains(filter) || (parsingSuccess && s.Id == id));
             }
 
             return result.Skip((pageNo - 1) * pageSize)
                 .Take(pageSize);
+        }
+
+        [HttpGet("CompaniesCount")]
+        public int GetCompaniesCount(string filter)
+        {
+            IQueryable<Company> result = from s in companiesRepository.Companies
+                                         select s;
+            int id;
+            bool parsingSuccess = Int32.TryParse(filter, out id);
+            if (!String.IsNullOrEmpty(filter))
+            {
+                result = result.Where(s => s.Name.Contains(filter) || (parsingSuccess && s.Id == id));
+            }
+            return result.Count();
         }
 
         [HttpGet("{id}")]

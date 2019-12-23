@@ -2,26 +2,173 @@
 @{
     Layout = "_AdminLayout";
 }
-
-<form asp-action="AddCompany" method="get">
-    <input type="submit" value="Dodaj firmę" style="margin-top: 100px; margin-left: 120px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
-        height: 40px; color: white; font-weight: bold;" />
-</form>
-
-<div class="hrlist">
-    @foreach(Company company in Model)
-    {
-    <div class="firmacard">
-        <div class="hrnapis">--</div>
-        <div class="hrdane">
-            <div class="hruser">@company.Name</div>
-            <div class="hrid">id firmy: @company.Id</div>
+<div style="display: flex; margin-top: 90px; margin-left: 120px; flex-direction: row;">
+    <div class="szukaj" style="width: 650px;">
+        <div class="szukajtextbox">
+            <input type="text" class="szukajka" id="szukajka" placeholder="Szukaj...">
+            <button class="searchbutton" onclick="applyFilter()"><img src="~/obrazki/szukaj.png"></button>
         </div>
-        <a class="firmamodyfikuj" asp-action="AddCompany" asp-route-companyId="@company.Id">Zmień</a>
-        <form style="right: 10px; bottom: 40px; grid-column: 3; position: relative;" asp-action="DeleteCompany" method="post">
-            <input type="hidden" name="ID" value="@company.Id" />
-            <button type="submit" class="firmausun" style="cursor: pointer;">Usuń</button>
-        </form>
     </div>
-    }
+    <form asp-action="AddCompany" method="get">
+        <input type="submit" value="Dodaj firmę" style="margin-top: 20px; margin-left: 70px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
+    height: 40px; color: white; font-weight: bold;" />
+    </form>
 </div>
+
+
+
+<div class="hrlist" id="hrid" data-modify-action="@Url.Action("AddCompany")">
+</div>
+
+<div style="display: flex; position: absolute; right: 100px; margin-top: 50px;" id="pageid">
+</div>
+
+
+
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+    var uri = '@Startup.Configuration["ApiAddress"]' + '/api/Companies';
+    var pageNo = 1;
+    var pageSize = 6;
+    var nElems = 0;
+    var filter = "";
+    var request = $.ajax({
+        url: uri,
+        type: 'GET',
+        data: { pageSize: pageSize, pageNo: pageNo },
+        contentType: 'application/json; charset=utf-8'
+    });
+
+    var nElemsRequest = $.ajax({
+        url: uri + '/CompaniesCount',
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8'
+    });
+
+    $(document).ready(function () {
+        nElemsRequest.done(function (data) {
+            nElems = data;
+            var paging = "";
+            for (var i = 1; i <= Math.ceil(nElems / pageSize); i++) {
+                if(i == pageNo)
+                    paging += '<button style="border: 1px solid black; background-color: lightpink; width: 30px; height: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+                else
+                    paging += '<button style="border: 1px solid black; background-color: white; height: 30px; width: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+            }
+            var d1 = document.getElementById('pageid');
+            d1.insertAdjacentHTML('beforeend', paging);
+        });
+        request.done(function (data) {
+                $.each(data, function (key, item) {
+                    table = '<div class="firmacard" id="' + item.id +'">';
+                    table += '<div class="hrnapis">--</div>';
+                    table += '<div class="hrdane">';
+                    table += '<div class="hruser">' + item.name + '</div>';
+                    table += '<div class="hrid"> id firmy: ' + item.id + '</div>';
+                    table += '</div>'
+                    table += '<a class="firmamodyfikuj" href="' + document.getElementById('hrid').dataset.modifyAction + '/' + item.id + '">Zmień</a>';
+                    table += '<button class="firmausun" style="cursor: pointer; right: 10px; bottom: 40px; grid-column: 3; position: relative;" onclick="deleteItem(' + item.id + ')">Usuń</button>';
+                    table += '</div>';
+
+                    var d1 = document.getElementById('hrid');
+                    d1.insertAdjacentHTML('beforeend', table);
+                });
+        });
+        
+
+    })
+
+    function deleteItem(id) {
+        var delUri = '@Startup.Configuration["ApiAddress"]' + '/api/Companies/' + id;
+        $.ajax({
+            url: delUri,
+            type: 'DELETE',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                document.getElementById(id).remove();
+            },
+            error: function (data) {
+                window.alert("Nie można usunąć!");
+            }
+        });
+    }
+
+    function changePage(page) {
+        document.getElementById("page" + pageNo).style.backgroundColor = "white";
+        document.getElementById("page" + page).style.backgroundColor = "lightpink";
+        pageNo = page;
+        document.getElementById("hrid").innerHTML = "";
+
+        request = $.ajax({
+            url: uri,
+            type: 'GET',
+            data: { pageSize: pageSize, pageNo: pageNo, filter: filter },
+            contentType: 'application/json; charset=utf-8'
+        });
+
+        request.done(function (data) {
+            $.each(data, function (key, item) {
+                table = '<div class="firmacard" id="' + item.id +'">';
+                table += '<div class="hrnapis">--</div>';
+                table += '<div class="hrdane">';
+                table += '<div class="hruser">' + item.name + '</div>';
+                table += '<div class="hrid"> id firmy: ' + item.id + '</div>';
+                table += '</div>'
+                table += '<a class="firmamodyfikuj" href="' + document.getElementById('hrid').dataset.modifyAction + '/' + item.id + '">Zmień</a>';
+                table += '<button class="firmausun" style="cursor: pointer; right: 10px; bottom: 40px; grid-column: 3; position: relative;" onclick="deleteItem(' + item.id + ')">Usuń</button>';
+                table += '</div>';
+
+                var d1 = document.getElementById('hrid');
+                d1.insertAdjacentHTML('beforeend', table);
+            });
+        });
+    }
+
+    function applyFilter() {
+        filter = document.getElementById("szukajka").value;
+        document.getElementById("hrid").innerHTML = "";
+        document.getElementById("pageid").innerHTML = "";
+        pageNo = 1;
+
+        $.ajax({
+            url: uri + '/CompaniesCount',
+            type: 'GET',
+            data: {filter: filter},
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (data) {
+            nElems = data;
+            var paging = "";
+            for (var i = 1; i <= Math.ceil(nElems / pageSize); i++) {
+                if(i == pageNo)
+                    paging += '<button style="border: 1px solid black; background-color: lightpink; width: 30px; height: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+                else
+                    paging += '<button style="border: 1px solid black; background-color: white; height: 30px; width: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+            }
+            var d1 = document.getElementById('pageid');
+            d1.insertAdjacentHTML('beforeend', paging);
+        });
+
+        $.ajax({
+            url: uri,
+            type: 'GET',
+            data: { pageSize: pageSize, pageNo: pageNo, filter: filter },
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (data) {
+            $.each(data, function (key, item) {
+                table = '<div class="firmacard" id="' + item.id +'">';
+                table += '<div class="hrnapis">--</div>';
+                table += '<div class="hrdane">';
+                table += '<div class="hruser">' + item.name + '</div>';
+                table += '<div class="hrid"> id firmy: ' + item.id + '</div>';
+                table += '</div>'
+                table += '<a class="firmamodyfikuj" href="' + document.getElementById('hrid').dataset.modifyAction + '/' + item.id + '">Zmień</a>';
+                table += '<button class="firmausun" style="cursor: pointer; right: 10px; bottom: 40px; grid-column: 3; position: relative;" onclick="deleteItem(' + item.id + ')">Usuń</button>';
+                table += '</div>';
+
+                var d1 = document.getElementById('hrid');
+                d1.insertAdjacentHTML('beforeend', table);
+            });
+        });
+    }
+</script>

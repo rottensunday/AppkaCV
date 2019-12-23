@@ -27,12 +27,9 @@ namespace Appka_CV.Controllers
         }
 
         [HttpGet]
-        public ViewResult AddOffer(int offerId)
+        public ViewResult AddOffer(int id)
         {
-            return View(offerId == 0 ? 
-                new JobOfferViewModel() { JobOffer = new JobOffer(), Companies = CompaniesRepository.Companies, SelectedCompany = 1}
-                : new JobOfferViewModel() { JobOffer = JobOffersRepository.JobOffers.Where(x => x.Id == offerId).FirstOrDefault(),
-                    Companies = CompaniesRepository.Companies, SelectedCompany = JobOffersRepository.JobOffers.Where(x => x.Id == offerId).FirstOrDefault().Company.Id });
+            return View(id);
         }
 
         [HttpPost]

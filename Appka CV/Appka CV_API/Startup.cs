@@ -29,6 +29,7 @@ namespace Appka_CV_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["DatabaseConnectionString"]));
+            services.AddCors();
             services.AddTransient<EFCompaniesRepository>();
             services.AddTransient<EFJobOffersRepository>();
             services.AddTransient<EFApplicationsRepository>();
@@ -46,7 +47,7 @@ namespace Appka_CV_API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

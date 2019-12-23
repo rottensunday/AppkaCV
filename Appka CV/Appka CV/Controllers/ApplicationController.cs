@@ -19,30 +19,29 @@ namespace Appka_CV.Controllers
             JobOffersRepository = repo2;
         }
 
-        public ViewResult Index() => View(ApplicationsRepository.Applications.Include(x => x.JobOffer));
+        public ViewResult Index() => View(ApplicationsRepository.Applications.Include(x => x.JobOffer).ThenInclude(x=> x.Company));
 
         [HttpGet]
-        public ViewResult AddApplication(int applicationId, int jobOfferId)
+        public ViewResult AddApplication(int id, int jobOffer)
         {
-            var repo = JobOffersRepository.JobOffers.FirstOrDefault(x => x.Id == jobOfferId);
-            return View(applicationId == 0 ? new JobApplicationViewModel { Application = new JobApplication(), JobOffer = jobOfferId == 0 ? new JobOffer() : JobOffersRepository.JobOffers.FirstOrDefault(x => x.Id == jobOfferId) } 
-            : new JobApplicationViewModel { Application = ApplicationsRepository.Applications.FirstOrDefault(x => x.Id == applicationId), JobOffer = JobOffersRepository.JobOffers.First(x => x.Id == jobOfferId)});
+            string offerTitle = JobOffersRepository.JobOffers.FirstOrDefault(x => x.Id == jobOffer)?.JobTitle ?? "";
+            return View((id, jobOffer, offerTitle));
         }
 
         [HttpPost]
         public IActionResult AddApplication(JobApplicationViewModel applicationModel)
         {
-            if (ModelState.IsValid)
-            {
-                JobApplication jobApplication = applicationModel.Application;
-                jobApplication.JobOffer = JobOffersRepository.JobOffers.Where(x => x.Id == applicationModel.JobOffer.Id).FirstOrDefault();
-                ApplicationsRepository.SaveApplication(jobApplication);
-                return RedirectToAction("Index");
-            }
-            else
-            {
+            //if (ModelState.IsValid)
+            //{
+            //    JobApplication jobApplication = applicationModel.Application;
+            //    jobApplication.JobOffer = JobOffersRepository.JobOffers.Where(x => x.Id == applicationModel.JobOffer.Id).FirstOrDefault();
+            //    ApplicationsRepository.SaveApplication(jobApplication);
+            //    return RedirectToAction("Index");
+            //}
+            //else
+            //{
                 return View(applicationModel);
-            }
+            //}
         }
 
         [HttpPost]

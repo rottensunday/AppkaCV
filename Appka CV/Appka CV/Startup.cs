@@ -15,12 +15,20 @@ namespace Appka_CV
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; set; }
+        public static IConfiguration Configuration { get; set; }
         public Startup(IConfiguration configuration) => Configuration = configuration;
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("myAllow",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["DatabaseConnectionString"]));
             services.AddTransient<EFCompaniesRepository>();
             services.AddTransient<EFJobOffersRepository>();
@@ -34,6 +42,7 @@ namespace Appka_CV
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
+            app.UseCors("myAllow");
             app.UseMvc(route =>
             {
                 route.MapRoute("", "{controller=JobOffer}/{action=Index}/{id?}");

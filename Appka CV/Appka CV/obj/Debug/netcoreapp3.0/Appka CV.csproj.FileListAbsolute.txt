@@ -340,3 +340,91 @@ D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Col
 D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.ComponentModel.Annotations.dll
 D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Diagnostics.DiagnosticSource.dll
 D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.MvcApplicationPartsAssemblyInfo.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\appsettings.Development.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\appsettings.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\libman.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.exe
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.deps.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.runtimeconfig.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.runtimeconfig.dev.json
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.pdb
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.Views.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Appka CV.Views.pdb
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Bcl.HashCode.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Data.SqlClient.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Memory.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.Debug.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Options.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Microsoft.Identity.Client.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\dotnet-aspnet-codegenerator-design.exe
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Collections.Immutable.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.ComponentModel.Annotations.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Configuration.ConfigurationManager.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Diagnostics.DiagnosticSource.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Runtime.Caching.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\System.Security.Cryptography.ProtectedData.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\win-arm64\native\sni.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\win-x64\native\sni.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\win-x86\native\sni.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\bin\Debug\netcoreapp3.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\staticwebassets\Appka CV.StaticWebAssets.Manifest.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\staticwebassets\Appka CV.StaticWebAssets.xml
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.MvcApplicationPartsAssemblyInfo.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.RazorAssemblyInfo.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.RazorAssemblyInfo.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.AssemblyInfoInputs.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.AssemblyInfo.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.TagHelpers.input.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.TagHelpers.output.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.RazorCoreGenerate.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\AddCompany.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\Index.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\ListCompanies.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Administrator\ListUsers.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Application\AddApplication.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Application\Index.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\JobOffer\AddOffer.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\JobOffer\Details.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\JobOffer\Index.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Razor\Views\_ViewStart.cshtml.g.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.RazorTargetAssemblyInfo.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.RazorTargetAssemblyInfo.cs
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.Views.pdb
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.csproj.CopyComplete
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.pdb
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\obj\Debug\netcoreapp3.0\Appka CV.csprojAssemblyReference.cache

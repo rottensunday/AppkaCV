@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Appka_CV_API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class JobApplicationsController : ControllerBase
     {
         private DataContext applicationsRepository;
@@ -25,9 +25,11 @@ namespace Appka_CV_API.Controllers
             IQueryable<JobApplication> result = from s in applicationsRepository.
                                                 JobApplications.Include(x => x.JobOffer)
                                                 select s;
+            int id;
+            bool parsingSuccess = Int32.TryParse(filter, out id);
             if (!String.IsNullOrEmpty(filter))
             {
-                result = result.Where(s => s.JobOffer.JobTitle.Contains(filter));
+                result = result.Where(s => s.JobOffer.JobTitle.Contains(filter) || (parsingSuccess && s.Id == id));
             }
             if (!String.IsNullOrEmpty(category))
             {
@@ -54,6 +56,42 @@ namespace Appka_CV_API.Controllers
                 .Take(pageSize);
         }
 
+        [HttpGet("JobApplicationsCount")]
+        public int GetJobApplicationsCount(string filter, string category, string position,
+            string city, string firstName, string lastName)
+        {
+            IQueryable<JobApplication> result = from s in applicationsRepository.
+                                    JobApplications.Include(x => x.JobOffer)
+                                                select s;
+            int id;
+            bool parsingSuccess = Int32.TryParse(filter, out id);
+            if (!String.IsNullOrEmpty(filter))
+            {
+                result = result.Where(s => s.JobOffer.JobTitle.Contains(filter) || (parsingSuccess && s.Id == id));
+            }
+            if (!String.IsNullOrEmpty(category))
+            {
+                result = result.Where(s => s.JobOffer.Category.Contains(category));
+            }
+            if (!String.IsNullOrEmpty(position))
+            {
+                result = result.Where(s => s.JobOffer.Position.Contains(position));
+            }
+            if (!String.IsNullOrEmpty(firstName))
+            {
+                result = result.Where(s => s.FirstName.Contains(firstName));
+            }
+            if (!String.IsNullOrEmpty(lastName))
+            {
+                result = result.Where(s => s.LastName.Contains(lastName));
+            }
+            if (!String.IsNullOrEmpty(city))
+            {
+                result = result.Where(s => s.JobOffer.City.Contains(city));
+            }
+            return result.Count();
+        }
+
         [HttpGet("{id}")]
         public JobApplication GetApplication(int id)
         {
@@ -63,6 +101,7 @@ namespace Appka_CV_API.Controllers
         [HttpPost]
         public async Task<ActionResult<JobApplication>> PostApplication(JobApplication application)
         {
+            applicationsRepository.Entry(application.JobOffer).State = EntityState.Unchanged;
             applicationsRepository.JobApplications.Add(application);
             await applicationsRepository.SaveChangesAsync();
 
@@ -77,6 +116,7 @@ namespace Appka_CV_API.Controllers
                 return BadRequest();
             }
 
+            applicationsRepository.Entry(application.JobOffer).State = EntityState.Unchanged;
             applicationsRepository.Entry(application).State = EntityState.Modified;
 
             try

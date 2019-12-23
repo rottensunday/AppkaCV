@@ -25,24 +25,24 @@ namespace Appka_CV.Controllers
         }
 
         [HttpGet]
-        public ViewResult AddCompany(int companyId)
+        public ViewResult AddCompany(int id)
         {
-            return View(companyId == 0 ? new Company() : CompaniesRepository.Companies.Where(x => x.Id == companyId).FirstOrDefault());
+            return View(id);
         }
 
-        [HttpPost]
-        public IActionResult AddCompany(Company company)
-        {
-            if (ModelState.IsValid)
-            {
-                CompaniesRepository.SaveCompany(company);
-                return RedirectToAction("ListCompanies");
-            }
-            else
-            {
-                return View(company);
-            }
-        }
+        //[HttpPost]
+        //public IActionResult AddCompany(Company company)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        CompaniesRepository.SaveCompany(company);
+        //        return RedirectToAction("ListCompanies");
+        //    }
+        //    else
+        //    {
+        //        return View(company);
+        //    }
+        //}
 
         [HttpPost]
         public IActionResult DeleteCompany(int id)

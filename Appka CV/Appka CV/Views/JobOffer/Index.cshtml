@@ -6,17 +6,17 @@
 <div style="display: flex; margin-top: 90px; margin-left: 120px; flex-direction: row;">
     <div class="szukaj">
         <div class="szukajtextbox">
-            <input type="text" class="szukajka" placeholder="Szukaj...">
-            <button class="searchbutton"><img src="~/obrazki/szukaj.png"></button>
+            <input type="text" class="szukajka" id="szukajka" placeholder="Szukaj...">
+            <button class="searchbutton" onclick="applyFilter()"><img src="~/obrazki/szukaj.png"></button>
         </div>
-        <div class="filtrbutton" id="dupal" onclick="myFunction()">
+        <div class="filtrbutton" id="filtr" onclick="myFunction()">
             <div class="filtrtext">Pokaż filtry</div>
             <div class="filtrarrow" id="arrow"><img src="~/obrazki/rightarrow.png"></div>
         </div>
     </div>
     <form style="position: relative; margin-left: 80px; margin-top: 9px;" asp-action="AddOffer" method="get">
         <input type="submit" value="Dodaj ofertę" style="background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
-        height: 40px; color: white; font-weight: bold;" />
+        height: 40px; color: white; font-weight: bold;"/>
     </form>
 </div>
 
@@ -24,36 +24,210 @@
 <div class="szukajexpand" id="szukajexpand">
     <div class="linia"></div>
     <div class="dziedzina">Dziedzina</div>
-    <input type="text" class="dziedzinatext">
+    <input type="text" class="dziedzinatext" id="category">
     <div class="pozycja">Pozycja</div>
-    <input type="text" class="pozycjatext">
+    <input type="text" class="pozycjatext" id="position">
     <div class="miasto">Miasto</div>
-    <input type="text" class="miastotext">
+    <input type="text" class="miastotext" id="city">
     <div class="zarobki">Zarobki</div>
-    <input type="text" class="zarobkitext">
+    <input type="text" class="zarobkitext" id="zarobki">
 </div>
 
 @if (Model != null)
 {
-    <div class="offerlist">
-        @foreach (JobOffer offer in Model)
-        {
-        <div class="offercard">
-            <div class="logo"><img src="obrazki/gaben.png"></div>
-            <div class="workcontent">
-                <div class="worktitle">@offer.JobTitle</div>
-                <div class="firma">@offer.Company.Name</div>
-                <div class="addressicon"><img src="obrazki/address.png"></div>
-                <div class="categoryicon"><img src="obrazki/kategoria.png"></div>
-                <div class="positionicon"><img src="obrazki/pozycja.png"></div>
-                <div class="cashicon"><img src="obrazki/gotowka.png"></div>
-                <div class="address">@offer.City</div>
-                <div class="category">@offer.Category</div>
-                <div class="position">@offer.Position</div>
-                <div class="cash">@offer.SalaryFrom</div>
-            </div>
-            <a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: #3BB55D" asp-action="AddApplication" asp-controller="Application" asp-route-jobOfferId="@offer.Id">Aplikuj</a>
-        </div>
-        }
+    <div class="offerlist" id="hrid">
     </div>
 }
+<div style="display: flex; position: absolute; right: 100px; margin-top: 50px;" id="pageid">
+</div>
+
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+    var uri = '@Startup.Configuration["ApiAddress"]' + '/api/JobOffers';
+    var addUri = '@Url.Action("AddOffer")';
+    var nElem = 0;
+    var pageSize = 6;
+    var pageNo = 1;
+    var filter = "";
+    var category = "";
+    var position = "";
+    var city = "";
+    var zarobki = "";
+    var applicationUri = '@Url.Action("AddApplication", "Application")';
+    var request = $.ajax({
+        url: uri,
+        type: 'GET',
+        data: { pageSize: pageSize, pageNo: pageNo} ,
+        contentType: 'application/json; charset=utf-8'
+    });
+
+    var nElemsRequest = $.ajax({
+        url: uri + '/JobOffersCount',
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8'
+    });
+
+    $(document).ready(function () {
+            nElemsRequest.done(function (data) {
+                nElems = data;
+                var paging = "";
+                for (var i = 1; i <= Math.ceil(nElems / pageSize); i++) {
+                    if(i == pageNo)
+                        paging += '<button style="border: 1px solid black; background-color: lightpink; width: 30px; height: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+                    else
+                        paging += '<button style="border: 1px solid black; background-color: white; height: 30px; width: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+                }
+                var d1 = document.getElementById('pageid');
+                d1.insertAdjacentHTML('beforeend', paging);
+            });
+            request.done(function (data) {
+                    $.each(data, function (key, item) {
+                        table = '<div class="offercard" id="' + item.id +'">';
+                        table += '<div class="logo"><img src="obrazki/gaben.png"></div>';
+                        table += '<div class="workcontent">';
+                        table += '<div class="worktitle">' + item.jobTitle + '</div>';
+                        table += '<div class="firma">' + item.company.name + '</div>';
+                        table += '<div class="addressicon"><img src="obrazki/address.png"></div>'
+                        table += '<div class="categoryicon"><img src="obrazki/kategoria.png"></div>';
+                        table += '<div class="positionicon"><img src="obrazki/pozycja.png"></div>';
+                        table += '<div class="cashicon"><img src="obrazki/gotowka.png"></div>';
+                        table += '<div class="address">' + item.city + '</div>';
+                        table += '<div class="category">' + item.category + '</div>';
+                        table += '<div class="position">' + item.position + '</div>';
+                        table += '<div class="cash">' + item.salaryFrom + '</div>';
+                        table += '</div>';
+                        table += '<div style="display: flex; flex-direction: column; justify-content: end; gap: 10px;">';
+                        table += '<button class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(175, 56, 35);" onclick="deleteItem(' + item.id + ')">Usuń</button>';
+                        table += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(181, 190, 50);" href="' + addUri + '/' + item.id + '">Zmień</a>';
+                        table += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: #3BB55D;" href="' + applicationUri + '?jobOffer=' + item.id + '">Aplikuj</button>';
+                            table += '</div>';
+                            table += '</div>';
+
+                            var d1 = document.getElementById('hrid');
+                            d1.insertAdjacentHTML('beforeend', table);
+                        });
+                });
+        })
+
+    function deleteItem(id) {
+        var delUri = '@Startup.Configuration["ApiAddress"]' + '/api/JobOffers/' + id;
+        $.ajax({
+            url: delUri,
+            type: 'DELETE',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                document.getElementById(id).remove();
+            },
+            error: function (data) {
+                window.alert("Nie można usunąć!");
+            }
+        });
+    }
+
+    function changePage(page) {
+        document.getElementById("page" + pageNo).style.backgroundColor = "white";
+        document.getElementById("page" + page).style.backgroundColor = "lightpink";
+        pageNo = page;
+        document.getElementById("hrid").innerHTML = "";
+
+        request = $.ajax({
+            url: uri,
+            type: 'GET',
+            data: { pageSize: pageSize, pageNo: pageNo, filter: filter, category: category, position: position, city: city },
+            contentType: 'application/json; charset=utf-8'
+        });
+        request.done(function (data) {
+            $.each(data, function (key, item) {
+                table = '<div class="offercard" id="' + item.id + '">';
+                table += '<div class="logo"><img src="obrazki/gaben.png"></div>';
+                table += '<div class="workcontent">';
+                table += '<div class="worktitle">' + item.jobTitle + '</div>';
+                table += '<div class="firma">' + item.company.name + '</div>';
+                table += '<div class="addressicon"><img src="obrazki/address.png"></div>'
+                table += '<div class="categoryicon"><img src="obrazki/kategoria.png"></div>';
+                table += '<div class="positionicon"><img src="obrazki/pozycja.png"></div>';
+                table += '<div class="cashicon"><img src="obrazki/gotowka.png"></div>';
+                table += '<div class="address">' + item.city + '</div>';
+                table += '<div class="category">' + item.category + '</div>';
+                table += '<div class="position">' + item.position + '</div>';
+                table += '<div class="cash">' + item.salaryFrom + '</div>';
+                table += '</div>';
+                table += '<div style="display: flex; flex-direction: column; justify-content: end; gap: 10px;">';
+                table += '<button class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(175, 56, 35);" onclick="deleteItem(' + item.id + ')">Usuń</button>';
+                table += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(181, 190, 50);" href="' + addUri + '/' + item.id + '">Zmień</a>';
+                table += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: #3BB55D;" href="' + applicationUri + '?jobOffer=' + item.id + '">Aplikuj</button>';
+                table += '</div>';
+                table += '</div>';
+
+                var d1 = document.getElementById('hrid');
+                d1.insertAdjacentHTML('beforeend', table);
+            });
+        });
+    }
+    function applyFilter() {
+        filter = document.getElementById("szukajka").value;
+        category = document.getElementById("category").value;
+        position = document.getElementById("position").value;
+        city = document.getElementById("city").value;
+        zarobki = document.getElementById("zarobki").value;
+
+        document.getElementById("hrid").innerHTML = "";
+        document.getElementById("pageid").innerHTML = "";
+        pageNo = 1;
+
+        $.ajax({
+            url: uri + '/JobOffersCount',
+            type: 'GET',
+            data: {filter: filter, category: category, position: position, city: city},
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (data) {
+            nElems = data;
+            var paging = "";
+            for (var i = 1; i <= Math.ceil(nElems / pageSize); i++) {
+                if(i == pageNo)
+                    paging += '<button style="border: 1px solid black; background-color: lightpink; width: 30px; height: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+                else
+                    paging += '<button style="border: 1px solid black; background-color: white; height: 30px; width: 30px;" id="page' + i + '" onclick="changePage(' + i +')">' + i + '</button>';
+            }
+            var d1 = document.getElementById('pageid');
+            d1.insertAdjacentHTML('beforeend', paging);
+        });
+
+        $.ajax({
+            url: uri,
+            type: 'GET',
+            data: { pageSize: pageSize, pageNo: pageNo, filter: filter, category: category, position: position, city: city },
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (data) {
+            $.each(data, function (key, item) {
+                table = '<div class="offercard" id="' + item.id + '">';
+                table += '<div class="logo"><img src="obrazki/gaben.png"></div>';
+                table += '<div class="workcontent">';
+                table += '<div class="worktitle">' + item.jobTitle + '</div>';
+                table += '<div class="firma">' + item.company.name + '</div>';
+                table += '<div class="addressicon"><img src="obrazki/address.png"></div>'
+                table += '<div class="categoryicon"><img src="obrazki/kategoria.png"></div>';
+                table += '<div class="positionicon"><img src="obrazki/pozycja.png"></div>';
+                table += '<div class="cashicon"><img src="obrazki/gotowka.png"></div>';
+                table += '<div class="address">' + item.city + '</div>';
+                table += '<div class="category">' + item.category + '</div>';
+                table += '<div class="position">' + item.position + '</div>';
+                table += '<div class="cash">' + item.salaryFrom + '</div>';
+                table += '</div>';
+                table += '<div style="display: flex; flex-direction: column; justify-content: end; gap: 10px;">';
+                table += '<button class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(175, 56, 35);" onclick="deleteItem(' + item.id + ')">Usuń</button>';
+                table += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(181, 190, 50);" href="' + addUri + '/' + item.id + '">Zmień</a>';
+                table += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: #3BB55D;" href="' + applicationUri + '?jobOffer=' + item.id + '">Aplikuj</button>';
+                table += '</div>';
+                table += '</div>';
+
+                var d1 = document.getElementById('hrid');
+                d1.insertAdjacentHTML('beforeend', table);
+            });
+        });
+
+    }
+
+
+</script>

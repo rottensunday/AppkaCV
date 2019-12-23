@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {}
+    "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {}
   },
   "projects": {
-    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {
+    "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
+        "projectUniqueName": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
         "projectName": "Appka CV_API",
-        "projectPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
+        "projectPath": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
         "packagesPath": "C:\\Users\\rotten\\.nuget\\packages\\",
-        "outputPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\obj\\",
+        "outputPath": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -46,6 +46,12 @@
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "Microsoft.CodeAnalysis.FxCopAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -84,6 +90,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -92,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

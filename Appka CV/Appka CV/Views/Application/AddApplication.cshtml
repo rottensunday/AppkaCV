@@ -1,55 +1,219 @@
-﻿@model JobApplicationViewModel
+﻿@model (int, int, string)
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "DodajCV";
 }
 
 <p style="margin-top: 100px; margin-left: 20px; font-family: Roboto; font-size: 64px; color:white;">Aplikuj teraz!</p>
-    <form asp-action="AddApplication" method="post">
-        <div class="cvform">
-            <div class="cvstart">
-                <div class="cvtitle">CV</div>
-                <div class="cvsummary2">
-                    <div class="cvtitle2">@Model.JobOffer.JobTitle</div>
-                    <input type="hidden" asp-for="JobOffer.Id" value="@Model.JobOffer.Id" />
-                    <input type="hidden" asp-for="Application.Id" value="@Model.Application.Id" />
-                    <div class="cvimie">Imię kandydata:</div>
-                    <input type="text" style="height: 25px; margin-top: 5px; grid-column: 2;" asp-for="Application.FirstName" value="@Model.Application.FirstName">
-                    <div class="cvnazwisko">Nazwisko kandydata: </div>
-                    <input type="text" style="height: 25px; margin-top: 5px; grid-column: 5;" asp-for="Application.LastName" value="@Model.Application.LastName">
-                </div>
+<form class="cvform" id="info" action="#">
+    <div class="cvstart">
+        <div class="cvtitle">CV</div>
+        <div class="cvsummary2">
+            <div class="cvtitle2" id="cvtitle">@Model.Item3</div>
+            <div class="cvimie">Imię kandydata:</div>
+            <div style="height: 25px; margin-top: 5px; grid-column: 2; display:flex; ">
+                <input style="margin-right: 10px;" type="text" id="firstName" name="firstName">
             </div>
-            <div class="cvexpand2">
-                <div class="cvline1" style="grid-column: 1 / span 2;"></div>
-                <div class="wyksztalcenie" style="height: 30px;">Wyksztalcenie:</div>
-                <select class="wyksztalcenietext" style="height: 30px; width: 150px;" asp-for="Application.Education">
-                    <option value="podstawowe">Podstawowe</option>
-                    <option value="średnie">Średnie</option>
-                    <option value="wyższe">Wyższe</option>
-                </select>
-                <div class="umiejetnosci">Umiejętności:</div>
-                <textarea style="margin-left: 60px; width: 700px; height: 170px;" asp-for="Application.Skills">@Model.Application.Skills</textarea>
-                <div class="zainteresowania">Zainteresowania:</div>
-                <textarea style="margin-left: 60px; width: 700px; height: 170px;" asp-for="Application.Hobbies">@Model.Application.Hobbies</textarea>
-                <div class="jezyki">Znane języki:</div>
-                <textarea style="margin-left: 60px; width: 500px; height: 80px;" asp-for="Application.Languages">@Model.Application.Languages</textarea>
-                <div class="adres">Adres:</div>
-                <input type="text" style="margin-left: 60px; width: 500px;" asp-for="Application.Address" value="@Model.Application.Address">
-                <div class="adres" style="grid-row: 7;">Adres email:</div>
-                <input type="text" style="margin-left: 60px; width: 500px;" asp-for="Application.EmailAddress" value="@Model.Application.EmailAddress">
-                <div class="adres" style="grid-row: 8">Numer telefonu:</div>
-                <input type="text" style="margin-left: 60px; width: 500px;" asp-for="Application.PhoneNumber" value="@Model.Application.PhoneNumber">
-                <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
-                <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
-                <input type="file" style="grid-column: 2;" asp-for="Application.FirstFile">
-                <div class="zalaczoneplikicontent" style="grid-row: 11; margin-bottom: 0px;">
-                    <div class="zalaczonyplik">1. jeden.pdf</div>
-                    <div class="zalaczonyplik">2. dwa.jpg</div>
-                    <div class="zalaczonyplik">3. teksty.pdf</div>
-                </div>
-                <button type="submit" style="grid-column: 2; grid-row: 12; height: 50px; margin-bottom: 10px; margin-right: 20px; justify-self: end; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px; color: white; font-weight: bold;">Dodaj CV</button>
+            <div class="cvnazwisko">Nazwisko kandydata: </div>
+            <div style="height: 25px; margin-top: 5px; grid-column: 5; display:flex; ">
+                <input style="margin-right: 10px;" type="text" id="lastName" name="lastName">
             </div>
+        </div>
+    </div>
+    <div class="cvexpand2">
+        <div class="cvline1" style="grid-column: 1 / span 2;"></div>
+        <div class="wyksztalcenie" style="height: 30px;">Wyksztalcenie:</div>
+        <select class="wyksztalcenietext" style="height: 30px; width: 150px;" id="wyksztalcenie">
+            <option value="podstawowe">Podstawowe</option>
+            <option value="średnie">Średnie</option>
+            <option value="wyższe">Wyższe</option>
+        </select>
+        <div class="umiejetnosci">Umiejętności:</div>
+        <textarea style="margin-left: 60px; width: 700px; height: 170px;" id="skills"></textarea>
+        <div class="zainteresowania">Zainteresowania:</div>
+        <textarea style="margin-left: 60px; width: 700px; height: 170px;" id="hobbies"></textarea>
+        <div class="jezyki">Znane języki:</div>
+        <textarea style="margin-left: 60px; width: 500px; height: 80px;" id="languages"></textarea>
+        <div class="adres">Adres:</div>
+        <input type="text" style="margin-left: 60px; width: 500px;" id="address">
+        <div class="adres" style="grid-row: 7;" >Adres email:</div>
+        <div style="display: flex; width: 800px; margin-left: 60px;">
+            <input type="text" style="width: 500px; margin-right: 10px;" id="email" name="email">
+        </div>
+        <div class="adres" style="grid-row: 8" name="phone">Numer telefonu:</div>
+        <div style="display: flex; width: 800px; margin-left: 60px;">
+            <input type="text" style=" width: 500px; margin-right: 10px;" id="phone" name="phone">
+        </div>
+        <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
+        <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
+        <input type="file" style="grid-column: 2;">
+        <div class="zalaczoneplikicontent" style="grid-row: 11; margin-bottom: 0px;">
+            <div class="zalaczonyplik">1. jeden.pdf</div>
+            <div class="zalaczonyplik">2. dwa.jpg</div>
+            <div class="zalaczonyplik">3. teksty.pdf</div>
+        </div>
+        @if(@Model.Item1 == 0)
+        {
+        <button type="button" style="grid-column: 2; grid-row: 12; height: 50px; margin-bottom: 10px; margin-right: 20px; justify-self: end; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px; color: white; font-weight: bold;" class="applicationButton">Dodaj CV</button>
+        }
+        else
+        {
+        <button type="button" style="grid-column: 2; grid-row: 12; height: 50px; margin-bottom: 10px; margin-right: 20px; justify-self: end; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px; color: white; font-weight: bold;" class="applicationButton">Zmień CV</button>
+        }
 
-             </div>
-        
-    </form>
+    </div>
+</form>
+
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    var info = @Model.Item1;
+    var modelOffer = @Model.Item2;
+    var modelOfferTitle = '@Model.Item3';
+    var uri;
+    var offerId;
+    var offerTitle;
+
+
+
+
+    $(document).ready(function () {
+        if (info != 0) uri = '@Startup.Configuration["ApiAddress"]' + '/api/JobApplications/' + info;
+        else uri = '@Startup.Configuration["ApiAddress"]' + '/api/JobApplications'; 
+        var request = $.ajax({
+            url: uri,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8'
+        });
+        if (info != 0) {
+            request.done(function (data) {
+                document.getElementById("cvtitle").innerHTML = data.jobOffer.jobTitle;
+                document.getElementById("firstName").setAttribute('value', data.firstName);
+                document.getElementById("lastName").setAttribute('value', data.lastName);
+                document.getElementById("skills").innerHTML = data.skills;
+                document.getElementById("hobbies").innerHTML = data.hobbies;
+                document.getElementById("languages").innerHTML = data.languages;
+                document.getElementById("address").setAttribute('value', data.address);
+                document.getElementById("email").setAttribute('value', data.emailAddress);
+                document.getElementById("phone").setAttribute('value', data.phoneNumber);
+                document.getElementById("wyksztalcenie").value = data.education.toLowerCase();
+                offerId = data.jobOffer.id;
+                offerTitle = data.jobOffer.jobTitle;
+            });
+        }
+        $('#info').validate({ // initialize plugin
+        // rules & options,
+            rules: {
+                firstName: {
+                    required: true
+                },
+                lastName: {
+                    required: true
+                },
+                email: {
+                    required: true
+                },
+                phone: {
+                    required: true
+                }
+            },
+            messages: {
+                firstName: {
+                    required: "Imię nie może być puste."
+                },
+                lastName: {
+                    required: "Nazwisko nie może być puste."
+                },
+                email: {
+                    required: "Email nie może być pusty."
+                },
+                phone: {
+                    required: "Telefon nie może być pusty."
+                }
+            },
+            submitHandler: function (form) {
+                if (@Model.Item1 == 0) addApplication();
+                else editApplication(@Model.Item1);
+                return false;  // blocks regular submit since you have ajax
+            }
+        });
+        $('.applicationButton').on('click', function () {
+            $('#info').submit();
+        });
+    })
+
+    function addApplication() {
+        var education = document.getElementById("wyksztalcenie");
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var skills = document.getElementById("skills").value;
+        var hobbies = document.getElementById("hobbies").value;
+        var languages = document.getElementById("languages").value;
+        var address = document.getElementById("address").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var wyksztalcenie = education.options[education.selectedIndex].text;
+        $.ajax({
+            url: uri,
+            type: 'POST',
+            data: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                skills: skills,
+                hobbies: hobbies,
+                languages: languages,
+                jobOffer: {
+                    id: modelOffer,
+                    jobTitle: modelOfferTitle
+                },
+                address: address,
+                emailAddress: email,
+                phoneNumber: phone,
+                education: wyksztalcenie
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) { window.alert("Dodano aplikację!"); },
+            error: function (result) { window.alert("Nie udało się dodać aplikacji."); }
+        })
+    }
+
+    function editApplication(id) {
+        var education = document.getElementById("wyksztalcenie");
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var skills = document.getElementById("skills").value;
+        var hobbies = document.getElementById("hobbies").value;
+        var languages = document.getElementById("languages").value;
+        var address = document.getElementById("address").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var wyksztalcenie = education.options[education.selectedIndex].text;
+        $.ajax({
+            url: uri,
+            type: 'PUT',
+            data: JSON.stringify({
+                id: id,
+                firstName: firstName,
+                lastName: lastName,
+                skills: skills,
+                hobbies: hobbies,
+                languages: languages,
+                jobOffer: {
+                    id: offerId,
+                    jobTitle: offerTitle
+                },
+                address: address,
+                emailAddress: email,
+                phoneNumber: phone,
+                education: wyksztalcenie
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) { window.alert("Zmieniono aplikację!"); },
+            error: function (result) { window.alert("Nie udało się zmienić aplikacji."); }
+        })
+    }
+</script>
