@@ -9,36 +9,53 @@
     <div class="cvexpand2" style="grid-row-gap: 30px">
         <div class="cvline1" style="grid-column: 1 / span 2; margin-top: 20px;"></div>
         <div class="wyksztalcenie" style="height: 30px;">Firma:</div>
-        <select class="wyksztalcenietext" style="height: 30px; width: 150px;" id="companies">
+        <select class="wyksztalcenietext" style="height: 30px; width: 150px;" id="companies" data-bind="readSelectedText: company">
             <option disabled selected>Wybierz firmę</option>
         </select>
         <div class="umiejetnosci" style="grid-row: 3; grid-column: 1;">Tytuł:</div>
         <div style="grid-row:3; grid-column:2; width: 700px; display: flex;">
-            <input type="text" style="margin-left: 60px; margin-right: 30px; width: 400px;" id="title" name="title">
+            <input type="text" style="margin-left: 60px; margin-right: 30px; width: 400px;" id="title" name="title" data-bind="value: jobTitle">
         </div>
         <div class="zainteresowania">Opis:</div>
         <textarea style="margin-left: 60px; width: 700px; height: 170px;" id="description"></textarea>
         <div class="jezyki">Kategoria:</div>
-        <input type="text" style="margin-left: 60px; width: 400px;" id="category">
+        <input type="text" style="margin-left: 60px; width: 400px;" id="category" data-bind="value: category">
         <div class="adres">Pozycja:</div>
-        <input type="text" style="margin-left: 60px; width: 400px;" id="position">
+        <input type="text" style="margin-left: 60px; width: 400px;" id="position" data-bind="value: position">
         <div class="adres" style="grid-column: 1; grid-row: 7;">Zarobki:</div>
-        <input type="text" style="margin-left: 60px; width: 400px;" id="salaryFrom">
+        <input type="text" style="margin-left: 60px; width: 400px;" id="salaryFrom" data-bind="value: salaryFrom">
         <div class="adres" style="grid-column: 1; grid-row: 8;">Miasto:</div>
-        <input type="text" style="margin-left: 60px; width: 400px;" id="city">
+        <input type="text" style="margin-left: 60px; width: 400px;" id="city" data-bind="value: city">
         <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
         <div class="adres" style="grid-column: 1; grid-row: 10; margin-bottom: 20px;">Logo firmy:</div>
         <input type="file">
+        <div style="grid-row: 11; grid-column-start: span 2; display:flex; justify-content: center;">
+            <div class="oferta" style="margin-top: 0px;">
+                <div class="logo"><img src="~/obrazki/gaben.png"></div>
+                <div class="workcontent">
+                    <div class="worktitle" data-bind="text: jobTitle"></div>
+                    <div class="firma" data-bind="text: company"></div>
+                    <div class="addressicon"><img src="~/obrazki/address.png"></div>
+                    <div class="categoryicon"><img src="~/obrazki/kategoria.png"></div>
+                    <div class="positionicon"><img src="~/obrazki/pozycja.png"></div>
+                    <div class="cashicon"><img src="~/obrazki/gotowka.png"></div>
+                    <div class="address" data-bind="text: city"></div>
+                    <div class="category" data-bind="text: category"></div>
+                    <div class="position" data-bind="text: position"></div>
+                    <div class="cash" data-bind="text: salaryFrom"></div>
+                </div>
+            </div>
+        </div>
         @if (Model == 0)
         {
-            <button type="button"  style="margin-right: 100px; margin-bottom: 50px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
+            <button type="button" style="margin-right: 100px; margin-bottom: 50px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
                     height: 40px; color: white; font-weight: bold; grid-column: 2; justify-self: end; margin-bottom: 20px; margin-right: 20px;" class="offerButton">
                 Dodaj
             </button>
         }
         else
         {
-            <button type="button"  style="margin-right: 100px; margin-bottom: 50px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
+            <button type="button" style="margin-right: 100px; margin-bottom: 50px; background: #3BB55D; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border: none; font-family: Roboto; width: 170px;
                     height: 40px; color: white; font-weight: bold; grid-column: 2; justify-self: end; margin-bottom: 20px; margin-right: 20px;" class="offerButton">
                 Zapisz
             </button>
@@ -51,6 +68,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
 <script>
     var info = @Model;
     var uri;
@@ -60,7 +78,8 @@
     var companiesRequest = $.ajax({
         url: '@Startup.Configuration["ApiAddress"]' + '/api/Companies',
         type: 'GET',
-        contentType: 'application/json; charset=utf-8'
+        contentType: 'application/json; charset=utf-8',
+        async: false
     });
     var request = $.ajax({
         url: uri,
@@ -68,23 +87,36 @@
         contentType: 'application/json; charset=utf-8'
     });
 
+    ko.bindingHandlers.readSelectedText = {
+      init: function(element, valueAccessor) {
+        var value = valueAccessor();
+
+        $(element).change(function() {
+          value($("option:selected", this).text());
+        });
+      },
+      update: function(element, valueAccessor) {}
+    };
 
     $(document).ready(function () {
         companiesRequest.done(function (data) {
             $.each(data, function (key, item) {
                 $("#companies").append($("<option></option>").text(item.name).val(item.id));
+            });
         });
         if (info != 0) {
-        request.done(function (data) {
-            document.getElementById("companies").value = data.company.id;
-            document.getElementById("title").setAttribute('value', data.jobTitle);
-            document.getElementById("description").innerHTML = data.description;
-            document.getElementById("category").setAttribute('value', data.category);
-            document.getElementById("position").setAttribute('value', data.position);
-            document.getElementById("salaryFrom").setAttribute('value', data.salaryFrom);
-            document.getElementById("city").setAttribute('value', data.city);
-            })
-            }
+            request.done(function (data) {
+                document.getElementById("companies").value = data.company.id;
+                document.getElementById("title").setAttribute('value', data.jobTitle);
+                document.getElementById("description").innerHTML = data.description;
+                document.getElementById("category").setAttribute('value', data.category);
+                document.getElementById("position").setAttribute('value', data.position);
+                document.getElementById("salaryFrom").setAttribute('value', data.salaryFrom);
+                document.getElementById("city").setAttribute('value', data.city);
+                ko.applyBindings(new AppViewModel());
+            });
+        }
+        else ko.applyBindings(new AppViewModel());
 
         $('#info').validate({ // initialize plugin
         // rules & options,
@@ -111,8 +143,19 @@
 
     });
 
+    
+    function AppViewModel() {
+        this.jobTitle = ko.observable(document.getElementById("title").getAttribute('value'));
+        this.category = ko.observable(document.getElementById('category').getAttribute('value'));
+        this.position = ko.observable(document.getElementById('position').getAttribute('value'));
+        this.salaryFrom = ko.observable(document.getElementById('salaryFrom').getAttribute('value'));
+        this.city = ko.observable(document.getElementById('city').getAttribute('value'));
+        var company = document.getElementById("companies");
+        var companyId = company.value;
+        var companyName = company.options[company.selectedIndex].text;
+        this.company = ko.observable(companyName);
+    }
 
-    })
 
     function addOffer() {
         var jobTitle = document.getElementById("title").value;
