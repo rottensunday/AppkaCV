@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,12 @@ namespace Appka_CV_API.Models
         public string SalaryTo { get; set; }
         public string City { get; set; }
         public string ImageFile { get; set; }
+        public string HR { get; set; }
         [NonSerialized]
         public List<JobApplication> jobApplications;
+        [NotMapped]
+        public bool HasApplied { get; set; }
+        [NotMapped]
+        public int ApplicationId { get; set; } 
     }
 }

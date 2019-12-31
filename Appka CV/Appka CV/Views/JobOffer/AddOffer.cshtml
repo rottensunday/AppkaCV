@@ -1,7 +1,4 @@
 ﻿@model int
-@{
-    Layout = "_AdminLayout";
-}
 
 <p style="margin-top: 100px; margin-left: 40px; font-family: Roboto; font-size: 64px; color:white;">Dodaj ofertę</p>
 <form class="cvform" style="grid-template-rows: auto;" id="info" action="#">
@@ -180,7 +177,8 @@
                 company: {
                     id: companyId,
                     name: companyName
-                }
+                },
+                hr: '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Dodano ofertę!"); },
@@ -212,7 +210,8 @@
                 company: {
                     id: companyId,
                     name: companyName
-                }
+                },
+                hr: '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Zmieniono ofertę!"); },

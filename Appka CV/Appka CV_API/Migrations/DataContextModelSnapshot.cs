@@ -88,6 +88,9 @@ namespace Appka_CV_API.Migrations
                     b.Property<string>("ThirdFile")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("JobOfferId");
@@ -112,6 +115,9 @@ namespace Appka_CV_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HR")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageFile")

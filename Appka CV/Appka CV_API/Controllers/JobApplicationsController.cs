@@ -20,7 +20,7 @@ namespace Appka_CV_API.Controllers
 
         [HttpGet]
         public IQueryable<JobApplication> GetApplications(string filter, string category, string position,
-            string city, string firstName, string lastName, int pageSize = 4, int pageNo = 1)
+            string city, string firstName, string lastName, string email, string userType, int pageSize = 4, int pageNo = 1)
         {
             IQueryable<JobApplication> result = from s in applicationsRepository.
                                                 JobApplications.Include(x => x.JobOffer)
@@ -52,13 +52,22 @@ namespace Appka_CV_API.Controllers
                 result = result.Where(s => s.JobOffer.City.Contains(city));
             }
 
+            if(userType == "User")
+            {
+                result = result.Where(x => x.User == email);
+            }
+            else if(userType == "HR")
+            {
+                result = result.Where(x => x.JobOffer.HR == email);
+            }
+
             return result.Skip((pageNo - 1) * pageSize)
                 .Take(pageSize);
         }
 
         [HttpGet("JobApplicationsCount")]
         public int GetJobApplicationsCount(string filter, string category, string position,
-            string city, string firstName, string lastName)
+            string city, string firstName, string userType, string email, string lastName)
         {
             IQueryable<JobApplication> result = from s in applicationsRepository.
                                     JobApplications.Include(x => x.JobOffer)
@@ -89,6 +98,16 @@ namespace Appka_CV_API.Controllers
             {
                 result = result.Where(s => s.JobOffer.City.Contains(city));
             }
+
+            if (userType == "User")
+            {
+                result = result.Where(x => x.User == email);
+            }
+            else if (userType == "HR")
+            {
+                result = result.Where(x => x.JobOffer.HR == email);
+            }
+
             return result.Count();
         }
 

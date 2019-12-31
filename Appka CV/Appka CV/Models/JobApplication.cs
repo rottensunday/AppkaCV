@@ -28,5 +28,6 @@ namespace Appka_CV.Models
         public string FirstFile { get; set; }
         public string SecondFile { get; set; }
         public string ThirdFile { get; set; }
+        public string User { get; set; }
     }
 }

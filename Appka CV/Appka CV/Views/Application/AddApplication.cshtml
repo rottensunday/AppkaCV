@@ -1,6 +1,5 @@
 ﻿@model (int, int, string)
 @{
-    Layout = "_AdminLayout";
     ViewData["Title"] = "DodajCV";
 }
 
@@ -173,7 +172,8 @@
                 address: address,
                 emailAddress: email,
                 phoneNumber: phone,
-                education: wyksztalcenie
+                education: wyksztalcenie,
+                user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value'
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Dodano aplikację!"); },
@@ -209,7 +209,8 @@
                 address: address,
                 emailAddress: email,
                 phoneNumber: phone,
-                education: wyksztalcenie
+                education: wyksztalcenie,
+                user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value'
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Zmieniono aplikację!"); },

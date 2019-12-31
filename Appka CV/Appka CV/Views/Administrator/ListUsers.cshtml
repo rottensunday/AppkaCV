@@ -1,7 +1,49 @@
-﻿
-@{
-    ViewData["Title"] = "ListUsers";
-}
+﻿@model IEnumerable<User>
 
-<h1>ListUsers</h1>
+    <div class="offerlist" style="grid-template-columns: repeat(auto-fill, minmax(490px, 1fr)); margin-top: 120px;">
 
+        @foreach (User user in Model)
+        {
+            if (user.Role == "User")
+            {
+                <div class="nhrcard">
+                    <dic class="nhrnapis">NHR </dic>
+                    <div class="hrdane">
+                        <div class="hruser">@user.DisplayName</div>
+                    </div>
+
+                    <a class="hrdodaj" asp-action="ChangeUser" asp-route-objectid="@user.ObjectID" asp-route-role="@user.Role">
+                        <div class="teksthr">
+                            Dodaj do HR
+                        </div>
+                    </a>
+                </div>
+            }
+            else if (user.Role == "HR")
+            {
+                <div class="hrcard">
+                    <dic class="hrnapis">HR</dic>
+                    <div class="hrdane">
+                        <div class="hruser">@user.DisplayName</div>
+                    </div>
+
+                    <a class="hrusun" asp-action="ChangeUser" asp-route-objectid="@user.ObjectID" asp-route-role="@user.Role">
+                        <div class="teksthr">
+                            Usuń z HR
+                        </div>
+                    </a>
+                </div>
+
+            }
+            else if (user.Role == "Admin")
+            {
+                <div class="hrcard">
+                    <dic class="hrnapis">AD</dic>
+                    <div class="hrdane">
+                        <div class="hruser">@user.DisplayName</div>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>

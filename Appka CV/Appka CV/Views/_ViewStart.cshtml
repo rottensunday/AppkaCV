@@ -1,3 +1,15 @@
 ﻿@{
-    Layout = "_Layout";
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.HasClaim(claim => claim.Type == "extension_IsHR" && claim.Value == "true"))
+        {
+            Layout = "_HrLayout";
+        }
+        else if (User.HasClaim(claim => claim.Type == "extension_IsAdmin" && claim.Value == "true"))
+        {
+            Layout = "_AdminLayout";
+        }
+        else Layout = "_UserLayout";
+    }
+    else Layout = "_Layout";
 }

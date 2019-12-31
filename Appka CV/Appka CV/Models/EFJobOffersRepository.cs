@@ -34,6 +34,7 @@ namespace Appka_CV.Models
                     offerEntry.Position = offer.Position;
                     offerEntry.SalaryFrom = offer.SalaryFrom;
                     offerEntry.SalaryTo = offer.SalaryTo;
+                    offerEntry.HRs = offer.HRs;
                 }
             }
 

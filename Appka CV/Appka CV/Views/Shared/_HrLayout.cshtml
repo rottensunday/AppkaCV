@@ -1,0 +1,44 @@
+﻿<html>
+<head>
+    <title>Hejka</title>
+    <link rel="stylesheet" type="text/css" href="~/styles.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto">
+
+</head>
+<body>
+    <header>
+        <a class="home" asp-controller="JobOffer" asp-action="Index"><img src="~/obrazki/home.png"></a>
+        <a class="przegladajoferty" asp-controller="JobOffer" asp-action="Index">Przeglądaj oferty</a>
+        <a class="przegladajcv" asp-controller="Application" asp-action="Index">Przeglądaj CV</a>
+        <div class="headerline"></div>
+        <div class="witaj" style="display: flex; flex-direction: column;">Witaj, <span id="nickname"> @User.Identity.Name!</span> <a style="color: red;"  asp-area="AzureADB2C" asp-controller="Account" asp-action="SignOut">Wyloguj</a></div>
+        <div class="user"><img src="~/obrazki/user.png"></div>
+        <script>
+        function myFunction() {
+            var content = document.getElementById("szukajexpand");
+            var arrow = document.getElementById("arrow");
+
+            if (content.style.maxHeight){
+            content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/rightarrow.png\">"
+            } else {
+            content.style.maxHeight = 150 + "px"; arrow.innerHTML = "<img src=\"obrazki/downarrow.png\">"
+            }
+        }
+
+        function myFunction1(id, id2) {
+            var content = document.getElementById(id);
+            var arrow = document.getElementById(id2);
+
+            if (content.style.maxHeight){
+            content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/smallarrowright.png\">"
+            } else {
+            content.style.maxHeight = 600 + "px"; arrow.innerHTML = "<img src=\"obrazki/smallarrowdown.png\">"
+            }
+        }
+        </script>
+    </header>
+
+    @RenderBody()
+</body>
+</html>

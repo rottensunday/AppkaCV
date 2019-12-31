@@ -1,21 +1,43 @@
-﻿
-<!DOCTYPE html>
-
-<html>
+﻿<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css" />
-    <title>@ViewData["Title"]</title>
-</head>
+    <title>Hejka</title>
+    <link rel="stylesheet" type="text/css" href="~/styles.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto">
 
+</head>
 <body>
-    <div class="row m-1 p-1">
-        <div id="categories" class="col-3">
-            <h3><a asp-controller="JobOffer" asp-action="Index">Job Offers</a></h3>
-        </div>
-        <div class="col-9">
-            @RenderBody()
-        </div>
-    </div>
+    <header>
+        <a class="home" asp-controller="JobOffer" asp-action="Index"><img src="~/obrazki/home.png"></a>
+        <a class="przegladajoferty" asp-controller="JobOffer" asp-action="Index">Przeglądaj oferty</a>
+        <div class="headerline"></div>
+        <a class="witaj" style="right: 50px;" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignIn">Logowanie</a>
+        <div class="user"><img src="~/obrazki/user.png"></div>
+        <script>
+            function myFunction() {
+                var content = document.getElementById("szukajexpand");
+                var arrow = document.getElementById("arrow");
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/rightarrow.png\">"
+                } else {
+                    content.style.maxHeight = 150 + "px"; arrow.innerHTML = "<img src=\"obrazki/downarrow.png\">"
+                }
+            }
+
+            function myFunction1(id, id2) {
+                var content = document.getElementById(id);
+                var arrow = document.getElementById(id2);
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null; arrow.innerHTML = "<img src=\"obrazki/smallarrowright.png\">"
+                } else {
+                    content.style.maxHeight = 600 + "px"; arrow.innerHTML = "<img src=\"obrazki/smallarrowdown.png\">"
+                }
+            }
+        </script>
+    </header>
+
+    @RenderBody()
 </body>
 </html>

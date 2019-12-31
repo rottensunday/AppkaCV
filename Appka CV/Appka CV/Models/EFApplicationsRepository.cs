@@ -38,6 +38,7 @@ namespace Appka_CV.Models
                     applicationEntry.Skills = application.Skills;
                     applicationEntry.ThirdFile = application.ThirdFile;
                     applicationEntry.Education = application.Education;
+                    applicationEntry.User = application.User;
 
                 }
             }

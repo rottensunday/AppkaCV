@@ -33,8 +33,29 @@ using Appka_CV;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\Views\_ViewImports.cshtml"
+using System.Security.Principal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV\Views\_ViewImports.cshtml"
+using Microsoft.Extensions.Options;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2ba351cf31643dbc62bfa92c12300debeff3bb04", @"/Views/JobOffer/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"90ba3feedf1a3b2f895fda9cc5639b2654bd12f5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"83c0fbd94f067aee304abe0ea45292254460eae1", @"/Views/_ViewImports.cshtml")]
     public class Views_JobOffer_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<JobOffer>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -87,7 +108,7 @@ Write(Model.JobTitle);
 #line hidden
 #nullable disable
             WriteLiteral("</h1>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ba351cf31643dbc62bfa92c12300debeff3bb044281", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ba351cf31643dbc62bfa92c12300debeff3bb044887", async() => {
                 WriteLiteral("<< Back");
             }
             );

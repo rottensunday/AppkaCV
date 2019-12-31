@@ -1000,6 +1000,7 @@ img
     flex-direction: column;
     align-self: center;
     margin-left: 7px;
+    width: 200px;
 }
 
 .hruser
@@ -1027,7 +1028,7 @@ img
 {
     width: 90px;
     height: 25px;
-    left: 165px;
+    left: 50px;
     top: 85px;
     background:
     #BD454D;
@@ -1039,6 +1040,9 @@ img
     white;
     font-weight: bolder;
     font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nhrcard
@@ -1046,8 +1050,6 @@ img
     display: flex;
     width: 500px;
     height: 120px;
-    margin-left: 20px;
-    margin-top: 50px;
     background:#FFFFFF;
 }
 
@@ -1079,7 +1081,7 @@ img
 {
     width: 90px;
     height: 25px;
-    left: 165px;
+    left: 50px;
     top: 85px;
     background:
     #3BB55D;
@@ -1091,6 +1093,20 @@ img
     white;
     font-weight: bolder;
     font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.teksthr
+{
+    position: absolute;
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 15px;
+    text-align: center;
+    color: white;
 }
 
 .szukajexpandhr

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 using Appka_CV.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,15 @@ namespace Appka_CV
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                .AddAzureADB2C(options => Configuration.Bind("AzureAdB2C", options));
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("HROnly", policy => policy.RequireClaim("extension_IsHR", "true"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("extension_IsAdmin", "true"));
+            });
+
+
             services.AddCors(options =>
             {
                 options.AddPolicy("myAllow",
@@ -43,6 +54,8 @@ namespace Appka_CV
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseCors("myAllow");
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseMvc(route =>
             {
                 route.MapRoute("", "{controller=JobOffer}/{action=Index}/{id?}");

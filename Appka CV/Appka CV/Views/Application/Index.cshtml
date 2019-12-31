@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<JobApplication>
 @{
-    Layout = "_AdminLayout";
     ViewData["Title"] = "Index";
 }
 
@@ -33,18 +32,6 @@
     <input type="text" class="nazwiskotext" id="lastname">
 </div>
 
-@*<div class="szukajexpand" id="szukajexpand">
-    <div class="linia"></div>
-    <div class="dziedzina">Dziedzina</div>
-    <input type="text" class="dziedzinatext">
-    <div class="pozycja">Pozycja</div>
-    <input type="text" class="pozycjatext">
-    <div class="miasto">Miasto</div>
-    <input type="text" class="miastotext">
-    <div class="zarobki">Zarobki</div>
-    <input type="text" class="zarobkitext">
-</div>*@
-
 @if (Model != null)
 {
     <div class="cvlist" id="hrid">
@@ -68,16 +55,20 @@
     var zarobki = "";
     var firstName = "";
     var lastName = "";
-        var request = $.ajax({
+    @{ string userType = @User.HasClaim(x => x.Type == "extension_IsHR" && x.Value == "true") ? "HR" : @User.HasClaim(x => x.Type == "extension_IsAdmin" && x.Value == "true") ? "Admin" : "User"; }
+    var userType = '@userType'
+    var email = '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
+    var request = $.ajax({
             url: uri,
             type: 'GET',
-            data: { pageSize: pageSize, pageNo: pageNo },
+            data: { pageSize: pageSize, pageNo: pageNo, userType: userType, email: email },
             contentType: 'application/json; charset=utf-8'
         });
      var nElemsRequest = $.ajax({
         url: uri + '/JobApplicationsCount',
-        type: 'GET',
-        contentType: 'application/json; charset=utf-8'
+         type: 'GET',
+         data: { userType: userType, email: email },
+         contentType: 'application/json; charset=utf-8'
     });
 
     $(document).ready(function () {
@@ -94,56 +85,11 @@
                 d1.insertAdjacentHTML('beforeend', paging);
             });
             request.done(function (data) {
-            $.each(data, function (key, item) {
-                table = `<div class="cv ` + item.id + `">
-                            <div class="cvtitle">CV</div>
-                            <div class="cvsummary">
-                                <div class="cvtitle2">` + item.jobOffer.jobTitle + `</div>
-                                <div class="cvimie">Imię kandydata:</div>
-                                <div class="cvimietext">` + item.firstName + `</div>
-                                <div class="cvnazwisko">Nazwisko kandydata: </div>
-                                <div class="cvnazwiskotext">` + item.lastName + `</div>
-                            </div>
-                            <div class="cvid">
-                                <div class="cvidoferty">id oferty:</div>
-                                <div class="cvidofertytext">` + item.jobOffer.id + `</div>
-                                <div class="cvidkandydata">id kandydata:</div>
-                                <div class="cvidkandydatatext">` + item.id + `</div>
-                                <div class="details" onclick="myFunction1(` + item.id + `,` + (300000 + item.id) + `) ">Szczegóły</div>
-                                <div class="smallarrowdown" id="` + (300000 + item.id) + `"><img src="obrazki/smallarrowdown.png"></div>
-                            </div>
-                            </div>
-                            <div class="cvexpand `+ item.id + `" id="` + item.id + `">
-                                <div class="cvline1"></div>
-                                <div class="wyksztalcenie">Wyksztalcenie:</div>
-                                <div class="wyksztalcenietext">` + item.education + `</div>
-                                <div class="umiejetnosci">Umiejętności:</div>
-                                <div style="width: 700px; word-wrap: break-word;" class="umiejetnoscitext">` + item.skills + `</div>
-                                <div class="zainteresowania">Zainteresowania:</div>
-                                <div style="width: 700px; word-wrap: break-word;" class="zainteresowaniatext">` + item.hobbies + `</div>
-                                <div class="jezyki">Znane języki:</div>
-                                <div style="width: 500px; word-wrap: break-word;" class="jezykitext">` + item.languages + `</div>
-                                <div class="adres">Adres:</div>
-                                <div class="adrestext">` + item.address + `</div>
-                                <div class="adres" style="grid-row: 7;">Adres email:</div>
-                                <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 7;">` + item.emailAddress + `</div>
-                                <div class="adres" style="grid-row: 8;">Numer telefonu:</div>
-                                <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 8;">` + item.phoneNumber + `</div>
-                                <div class="cvline2" style="grid-row: 9"></div>
-                                <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
-                                <div class="zalaczoneplikicontent" style="grid-row: 11;">
-                                    <div class="zalaczonyplik">1. jeden.pdf</div>
-                                    <div class="zalaczonyplik">2. dwa.jpg</div>
-                                    <div class="zalaczonyplik">3. teksty.pdf</div>
-                                </div>
-                                <a class="firmamodyfikuj changebutton" style="grid-row: 11; grid-column: 3; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
-                                <button class="deletebutton firmausun" style="cursor: pointer; grid-row: 11; grid-column:3;" onClick="deleteItem(` + item.id +`)">Usuń</button>
-                            </div>
-                        `;
+                $.each(data, function (key, item) {
+                    result = loadData(item);
                                     
-                var d1 = document.getElementById('hrid');
-                d1.insertAdjacentHTML('beforeend', table);
-                //$('<div class="firmacard" id="' + key + '">', { text: formatItem(item) }).appendTo($('#hrid'));
+                    var d1 = document.getElementById('hrid');
+                    d1.insertAdjacentHTML('beforeend', result);
             });
     });
         })
@@ -182,61 +128,17 @@
                 position: position,
                 city: city,
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName, userType: userType, email: email
             },
             contentType: 'application/json; charset=utf-8'
         });
 
         request.done(function (data) {
             $.each(data, function (key, item) {
-                table = `<div class="cv ` + item.id + `">
-                            <div class="cvtitle">CV</div>
-                            <div class="cvsummary">
-                                <div class="cvtitle2">` + item.jobOffer.jobTitle + `</div>
-                                <div class="cvimie">Imię kandydata:</div>
-                                <div class="cvimietext">` + item.firstName + `</div>
-                                <div class="cvnazwisko">Nazwisko kandydata: </div>
-                                <div class="cvnazwiskotext">` + item.lastName + `</div>
-                            </div>
-                            <div class="cvid">
-                                <div class="cvidoferty">id oferty:</div>
-                                <div class="cvidofertytext">` + item.jobOffer.id + `</div>
-                                <div class="cvidkandydata">id kandydata:</div>
-                                <div class="cvidkandydatatext">` + item.id + `</div>
-                                <div class="details" onclick="myFunction1(` + item.id + `,` + (300000 + item.id) + `) ">Szczegóły</div>
-                                <div class="smallarrowdown" id="` + (300000 + item.id) + `"><img src="obrazki/smallarrowdown.png"></div>
-                            </div>
-                            </div>
-                            <div class="cvexpand `+ item.id + `" id="` + item.id + `">
-                                <div class="cvline1"></div>
-                                <div class="wyksztalcenie">Wyksztalcenie:</div>
-                                <div class="wyksztalcenietext">` + item.education + `</div>
-                                <div class="umiejetnosci">Umiejętności:</div>
-                                <div style="width: 700px; word-wrap: break-word;" class="umiejetnoscitext">` + item.skills + `</div>
-                                <div class="zainteresowania">Zainteresowania:</div>
-                                <div style="width: 700px; word-wrap: break-word;" class="zainteresowaniatext">` + item.hobbies + `</div>
-                                <div class="jezyki">Znane języki:</div>
-                                <div style="width: 500px; word-wrap: break-word;" class="jezykitext">` + item.languages + `</div>
-                                <div class="adres">Adres:</div>
-                                <div class="adrestext">` + item.address + `</div>
-                                <div class="adres" style="grid-row: 7;">Adres email:</div>
-                                <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 7;">` + item.emailAddress + `</div>
-                                <div class="adres" style="grid-row: 8;">Numer telefonu:</div>
-                                <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 8;">` + item.phoneNumber + `</div>
-                                <div class="cvline2" style="grid-row: 9"></div>
-                                <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
-                                <div class="zalaczoneplikicontent" style="grid-row: 11;">
-                                    <div class="zalaczonyplik">1. jeden.pdf</div>
-                                    <div class="zalaczonyplik">2. dwa.jpg</div>
-                                    <div class="zalaczonyplik">3. teksty.pdf</div>
-                                </div>
-                                <a class="firmamodyfikuj changebutton" style="grid-row: 11; grid-column: 3; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
-                                <button class="deletebutton firmausun" style="cursor: pointer; grid-row: 11; grid-column:3;" onClick="deleteItem(` + item.id + `)">Usuń</button>
-                            </div>
-                        `;
+                result = loadData(item);
 
                 var d1 = document.getElementById('hrid');
-                d1.insertAdjacentHTML('beforeend', table);
+                d1.insertAdjacentHTML('beforeend', result);
             });
         });
     }
@@ -257,7 +159,7 @@
         $.ajax({
             url: uri + '/JobApplicationsCount',
             type: 'GET',
-            data: { filter: filter, category: category, position: position, city: city, lastName: lastName, firstName: firstName  },
+            data: { filter: filter, category: category, position: position, city: city, lastName: lastName, firstName: firstName, userType: userType, email: email  },
             contentType: 'application/json; charset=utf-8'
         }).done(function (data) {
             nElems = data;
@@ -275,59 +177,67 @@
         $.ajax({
             url: uri,
             type: 'GET',
-            data: { pageSize: pageSize, pageNo: pageNo, filter: filter, category: category, position: position, city: city, lastName: lastName, firstName: firstName  },
+            data: { pageSize: pageSize, pageNo: pageNo, filter: filter, category: category, position: position, city: city, lastName: lastName, firstName: firstName, userType: userType, email: email  },
             contentType: 'application/json; charset=utf-8'
         }).done(function (data) {
             $.each(data, function (key, item) {
-                table = `<div class="cv ` + item.id + `">
-                            <div class="cvtitle">CV</div>
-                            <div class="cvsummary">
-                                <div class="cvtitle2">` + item.jobOffer.jobTitle + `</div>
-                                <div class="cvimie">Imię kandydata:</div>
-                                <div class="cvimietext">` + item.firstName + `</div>
-                                <div class="cvnazwisko">Nazwisko kandydata: </div>
-                                <div class="cvnazwiskotext">` + item.lastName + `</div>
-                            </div>
-                            <div class="cvid">
-                                <div class="cvidoferty">id oferty:</div>
-                                <div class="cvidofertytext">` + item.jobOffer.id + `</div>
-                                <div class="cvidkandydata">id kandydata:</div>
-                                <div class="cvidkandydatatext">` + item.id + `</div>
-                                <div class="details" onclick="myFunction1(` + item.id + `,` + (300000 + item.id) + `) ">Szczegóły</div>
-                                <div class="smallarrowdown" id="` + (300000 + item.id) + `"><img src="obrazki/smallarrowdown.png"></div>
-                            </div>
-                            </div>
-                            <div class="cvexpand `+ item.id + `" id="` + item.id + `">
-                                <div class="cvline1"></div>
-                                <div class="wyksztalcenie">Wyksztalcenie:</div>
-                                <div class="wyksztalcenietext">` + item.education + `</div>
-                                <div class="umiejetnosci">Umiejętności:</div>
-                                <div style="width: 700px; word-wrap: break-word;" class="umiejetnoscitext">` + item.skills + `</div>
-                                <div class="zainteresowania">Zainteresowania:</div>
-                                <div style="width: 700px; word-wrap: break-word;" class="zainteresowaniatext">` + item.hobbies + `</div>
-                                <div class="jezyki">Znane języki:</div>
-                                <div style="width: 500px; word-wrap: break-word;" class="jezykitext">` + item.languages + `</div>
-                                <div class="adres">Adres:</div>
-                                <div class="adrestext">` + item.address + `</div>
-                                <div class="adres" style="grid-row: 7;">Adres email:</div>
-                                <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 7;">` + item.emailAddress + `</div>
-                                <div class="adres" style="grid-row: 8;">Numer telefonu:</div>
-                                <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 8;">` + item.phoneNumber + `</div>
-                                <div class="cvline2" style="grid-row: 9"></div>
-                                <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
-                                <div class="zalaczoneplikicontent" style="grid-row: 11;">
-                                    <div class="zalaczonyplik">1. jeden.pdf</div>
-                                    <div class="zalaczonyplik">2. dwa.jpg</div>
-                                    <div class="zalaczonyplik">3. teksty.pdf</div>
-                                </div>
-                                <a class="firmamodyfikuj changebutton" style="grid-row: 11; grid-column: 3; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
-                                <button class="deletebutton firmausun" style="cursor: pointer; grid-row: 11; grid-column:3;" onClick="deleteItem(` + item.id + `)">Usuń</button>
-                            </div>
-                        `;
+                result = loadData(item);
 
                 var d1 = document.getElementById('hrid');
-                d1.insertAdjacentHTML('beforeend', table);
+                d1.insertAdjacentHTML('beforeend', result);
             });
         });
+    }
+
+
+    function loadData(item) {
+        var result;
+        var insertVal = userType != "Admin" ? "onclick = \"myFunction1(" + item.id + "," + (300000 + item.id) + ") \"" : " ";
+        result = `<div class="cv ` + item.id + `">
+                    <div class="cvtitle">CV</div>
+                    <div class="cvsummary">
+                        <div class="cvtitle2">` + item.jobOffer.jobTitle + `</div>
+                        <div class="cvimie">Imię kandydata:</div>
+                        <div class="cvimietext">` + item.firstName + `</div>
+                        <div class="cvnazwisko">Nazwisko kandydata: </div>
+                        <div class="cvnazwiskotext">` + item.lastName + `</div>
+                    </div>
+                    <div class="cvid">
+                        <div class="cvidoferty">id oferty:</div>
+                        <div class="cvidofertytext">` + item.jobOffer.id + `</div>
+                        <div class="cvidkandydata">id kandydata:</div>
+                        <div class="cvidkandydatatext">` + item.id + `</div>
+                        <div class="details" ` + insertVal + `>Szczegóły</div>
+                        <div class="smallarrowdown" id="` + (300000 + item.id) + `"><img src="obrazki/smallarrowdown.png"></div>
+                    </div>
+                    </div>
+                    <div class="cvexpand `+ item.id + `" id="` + item.id + `">
+                        <div class="cvline1"></div>
+                        <div class="wyksztalcenie">Wyksztalcenie:</div>
+                        <div class="wyksztalcenietext">` + item.education + `</div>
+                        <div class="umiejetnosci">Umiejętności:</div>
+                        <div style="width: 700px; word-wrap: break-word;" class="umiejetnoscitext">` + item.skills + `</div>
+                        <div class="zainteresowania">Zainteresowania:</div>
+                        <div style="width: 700px; word-wrap: break-word;" class="zainteresowaniatext">` + item.hobbies + `</div>
+                        <div class="jezyki">Znane języki:</div>
+                        <div style="width: 500px; word-wrap: break-word;" class="jezykitext">` + item.languages + `</div>
+                        <div class="adres">Adres:</div>
+                        <div class="adrestext">` + item.address + `</div>
+                        <div class="adres" style="grid-row: 7;">Adres email:</div>
+                        <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 7;">` + item.emailAddress + `</div>
+                        <div class="adres" style="grid-row: 8;">Numer telefonu:</div>
+                        <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 8;">` + item.phoneNumber + `</div>
+                        <div class="cvline2" style="grid-row: 9"></div>
+                        <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
+                        <div class="zalaczoneplikicontent" style="grid-row: 11;">
+                            <div class="zalaczonyplik">1. jeden.pdf</div>
+                            <div class="zalaczonyplik">2. dwa.jpg</div>
+                            <div class="zalaczonyplik">3. teksty.pdf</div>
+                        </div>
+                        <a class="firmamodyfikuj changebutton" style="grid-row: 11; grid-column: 3; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
+                        <button class="deletebutton firmausun" style="cursor: pointer; grid-row: 11; grid-column:3;" onClick="deleteItem(` + item.id + `)">Usuń</button>
+                    </div>
+            `;
+        return result;
     }
 </script>

@@ -13,7 +13,7 @@
         <a class="przegladajcv" asp-controller="Application" asp-action="Index">Przeglądaj CV</a>
         <div class="headerline"></div>
         <a class="paneladministratora" asp-controller="Administrator" asp-action="Index"><div class="tekstadministrator">Panel administratora</div></a>
-        <div class="witaj">Witaj, <span id="nickname"> Arnachim!</span></div>
+        <div class="witaj" style="display: flex; flex-direction: column;">Witaj, <span id="nickname"> @User.Identity.Name!</span> <a style="color: red;" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignOut">Wyloguj</a></div>
         <div class="user"><img src="~/obrazki/user.png"></div>
         <script>
         function myFunction() {

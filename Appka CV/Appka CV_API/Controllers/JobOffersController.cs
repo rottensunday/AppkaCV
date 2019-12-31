@@ -20,7 +20,7 @@ namespace Appka_CV_API.Controllers
 
         [HttpGet]
         public IQueryable<JobOffer> GetOffers(string filter, string category, string position,
-            string city, int pageSize = 4, int pageNo = 1)
+            string city, string email, int pageSize = 4, int pageNo = 1)
         {
             IQueryable<JobOffer> result = from s in offersRepository.
                                                 JobOffers.Include(x => x.Company)
@@ -44,8 +44,19 @@ namespace Appka_CV_API.Controllers
                 result = result.Where(s => s.City.Contains(city));
             }
 
-            return result.Skip((pageNo - 1) * pageSize)
+            result = result.Skip((pageNo - 1) * pageSize)
                 .Take(pageSize);
+            foreach(var offer in result)
+            {
+                if (offersRepository.JobApplications.Include(x => x.JobOffer).Any(x => x.JobOffer.Id == offer.Id && x.User == email))
+                {
+                    offer.HasApplied = true;
+                    offer.ApplicationId = offersRepository.JobApplications.Include(x => x.JobOffer).FirstOrDefault(x => x.JobOffer.Id == offer.Id && x.User == email).Id;
+                }
+                else offer.HasApplied = false;
+            }
+
+            return result;
         }
 
         [HttpGet("JobOffersCount")]

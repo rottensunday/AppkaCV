@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Appka_CV.Models;
 using Appka_CV.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Appka_CV.Controllers
 {
@@ -26,12 +27,14 @@ namespace Appka_CV.Controllers
             return View(JobOffersRepository.JobOffers);
         }
 
+        [Authorize(Policy = "HROnly")]
         [HttpGet]
         public ViewResult AddOffer(int id)
         {
             return View(id);
         }
 
+        [Authorize(Policy = "HROnly")]
         [HttpPost]
         public IActionResult AddOffer(JobOfferViewModel offerModel)
         {
@@ -47,11 +50,5 @@ namespace Appka_CV.Controllers
                 return View(offerModel);
             }
         }
-
-        //public ViewResult Details(int id)
-        //{
-        //    return View(_jobOffers.Where(e => e.Id == id).FirstOrDefault());
-
-        //}
     }
 }

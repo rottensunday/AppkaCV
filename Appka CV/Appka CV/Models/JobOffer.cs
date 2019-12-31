@@ -21,5 +21,6 @@ namespace Appka_CV.Models
         public string ImageFile { get; set; }
 
         public List<JobApplication> JobApplications { get; set; }
+        public List<HR> HRs { get; set; }
     }
 }
