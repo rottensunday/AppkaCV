@@ -19,8 +19,10 @@ namespace Appka_CV_API.Models
         public string SalaryFrom { get; set; }
         public string SalaryTo { get; set; }
         public string City { get; set; }
-        public string ImageFile { get; set; }
+        public string FileName { get; set; }
         public string HR { get; set; }
+        [NotMapped]
+        public string FileData { get; set; }
         [NonSerialized]
         public List<JobApplication> jobApplications;
         [NotMapped]

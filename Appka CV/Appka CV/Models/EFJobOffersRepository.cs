@@ -28,13 +28,12 @@ namespace Appka_CV.Models
                     offerEntry.Company = offer.Company;
                     offerEntry.Description = offer.Description;
                     offerEntry.Id = offer.Id;
-                    offerEntry.ImageFile = offer.ImageFile;
-                    offerEntry.JobApplications = offer.JobApplications;
+                    offerEntry.FileData = offer.FileData;
+                    offerEntry.jobApplications = offer.jobApplications;
                     offerEntry.JobTitle = offer.JobTitle;
                     offerEntry.Position = offer.Position;
                     offerEntry.SalaryFrom = offer.SalaryFrom;
                     offerEntry.SalaryTo = offer.SalaryTo;
-                    offerEntry.HRs = offer.HRs;
                 }
             }
 
@@ -55,12 +54,12 @@ namespace Appka_CV.Models
 
         public void AddApplication(JobOffer offer, JobApplication application)
         {
-            if(offer != null && application != null)
+            if (offer != null && application != null)
             {
                 JobOffer offerEntry = context.JobOffers.FirstOrDefault(x => x.Id == offer.Id);
-                if(offerEntry != null)
+                if (offerEntry != null)
                 {
-                    offerEntry.JobApplications.Add(application);
+                    offerEntry.jobApplications.Add(application);
                 }
             }
 

@@ -118,3 +118,4 @@ D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3.0\Appka CV_API.dll
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3.0\Appka CV_API.pdb
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3.0\Appka CV_API.csprojAssemblyReference.cache
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Microsoft.WindowsAzure.Storage.dll

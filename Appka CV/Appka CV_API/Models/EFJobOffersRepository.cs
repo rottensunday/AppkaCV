@@ -28,7 +28,7 @@ namespace Appka_CV_API.Models
                     offerEntry.Company = offer.Company;
                     offerEntry.Description = offer.Description;
                     offerEntry.Id = offer.Id;
-                    offerEntry.ImageFile = offer.ImageFile;
+                    offerEntry.FileData = offer.FileData;
                     offerEntry.jobApplications = offer.jobApplications;
                     offerEntry.JobTitle = offer.JobTitle;
                     offerEntry.Position = offer.Position;

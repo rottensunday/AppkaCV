@@ -176,7 +176,7 @@
         var email = '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
 
         result = '<div class="offercard" id="' + item.id + '">';
-        result += '<div class="logo"><img src="obrazki/gaben.png"></div>';
+        result += '<div class="logo"><img src="' + item.fileData + '" style="width: 100%; height: 100%;"></div>';
         result += '<div class="workcontent">';
         result += '<div class="worktitle">' + item.jobTitle + '</div>';
         result += '<div class="firma">' + item.company.name + '</div>';

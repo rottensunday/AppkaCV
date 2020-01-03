@@ -44,12 +44,10 @@
             <input type="text" style=" width: 500px; margin-right: 10px;" id="phone" name="phone">
         </div>
         <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
-        <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
-        <input type="file" style="grid-column: 2;">
+        <div class="zalaczonepliki" style="grid-row: 10;">Załączony plik:</div>
+        <input type="file" id="file" style="grid-column: 2;">
         <div class="zalaczoneplikicontent" style="grid-row: 11; margin-bottom: 0px;">
-            <div class="zalaczonyplik">1. jeden.pdf</div>
-            <div class="zalaczonyplik">2. dwa.jpg</div>
-            <div class="zalaczonyplik">3. teksty.pdf</div>
+            <a class="zalaczonyplik" id="zalaczonyplik" download></a>
         </div>
         @if(@Model.Item1 == 0)
         {
@@ -76,8 +74,19 @@
     var uri;
     var offerId;
     var offerTitle;
+    var fileData = "";
+    var fileName = "";
+    const inputElement = document.getElementById("file");
+    inputElement.addEventListener("change", loadFile, false);
 
-
+    function loadFile() {
+        var reader = new FileReader();
+        reader.onload = function () {
+            fileData = reader.result;
+            document.getElementById("img").src = reader.result;
+        };
+        reader.readAsDataURL(document.getElementById("file").files[0]);
+    }
 
 
     $(document).ready(function () {
@@ -100,6 +109,10 @@
                 document.getElementById("email").setAttribute('value', data.emailAddress);
                 document.getElementById("phone").setAttribute('value', data.phoneNumber);
                 document.getElementById("wyksztalcenie").value = data.education.toLowerCase();
+                document.getElementById("zalaczonyplik").innerHTML = data.fileName;
+                document.getElementById("zalaczonyplik").setAttribute('href', 'https://appkacvstorage.blob.core.windows.net/myblobson/' + data.fileName);
+                fileName = data.fileName;
+                fileData = data.fileData;
                 offerId = data.jobOffer.id;
                 offerTitle = data.jobOffer.jobTitle;
             });
@@ -156,6 +169,13 @@
         var email = document.getElementById("email").value;
         var phone = document.getElementById("phone").value;
         var wyksztalcenie = education.options[education.selectedIndex].text;
+        if (typeof (document.getElementById("file").files[0]) != 'undefined') {
+            fileName = document.getElementById("file").files[0].name;
+        }
+        else {
+            fileName = "";
+            fileData = "";
+        }
         $.ajax({
             url: uri,
             type: 'POST',
@@ -173,7 +193,9 @@
                 emailAddress: email,
                 phoneNumber: phone,
                 education: wyksztalcenie,
-                user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value'
+                user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value',
+                fileName: fileName,
+                fileData: fileData
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Dodano aplikację!"); },
@@ -192,6 +214,9 @@
         var email = document.getElementById("email").value;
         var phone = document.getElementById("phone").value;
         var wyksztalcenie = education.options[education.selectedIndex].text;
+        if (typeof (document.getElementById("file").files[0]) != 'undefined') {
+            fileName = document.getElementById("file").files[0].name;
+        }
         $.ajax({
             url: uri,
             type: 'PUT',
@@ -210,7 +235,9 @@
                 emailAddress: email,
                 phoneNumber: phone,
                 education: wyksztalcenie,
-                user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value'
+                user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value',
+                fileName: fileName,
+                fileData: fileData
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Zmieniono aplikację!"); },

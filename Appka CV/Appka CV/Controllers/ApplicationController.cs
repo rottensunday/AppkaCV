@@ -29,35 +29,5 @@ namespace Appka_CV.Controllers
             string offerTitle = JobOffersRepository.JobOffers.FirstOrDefault(x => x.Id == jobOffer)?.JobTitle ?? "";
             return View((id, jobOffer, offerTitle));
         }
-
-        [HttpPost]
-        public IActionResult AddApplication(JobApplicationViewModel applicationModel)
-        {
-            //if (ModelState.IsValid)
-            //{
-            //    JobApplication jobApplication = applicationModel.Application;
-            //    jobApplication.JobOffer = JobOffersRepository.JobOffers.Where(x => x.Id == applicationModel.JobOffer.Id).FirstOrDefault();
-            //    ApplicationsRepository.SaveApplication(jobApplication);
-            //    return RedirectToAction("Index");
-            //}
-            //else
-            //{
-                return View(applicationModel);
-            //}
-        }
-
-        [HttpPost]
-        public IActionResult DeleteApplication(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                ApplicationsRepository.DeleteApplication(id);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View("Index");
-            }
-        }
     }
 }

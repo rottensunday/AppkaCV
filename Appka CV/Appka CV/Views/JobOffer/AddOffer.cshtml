@@ -25,10 +25,10 @@
         <input type="text" style="margin-left: 60px; width: 400px;" id="city" data-bind="value: city">
         <div class="cvline2" style="grid-column: 1 / span 2; grid-row: 9;"></div>
         <div class="adres" style="grid-column: 1; grid-row: 10; margin-bottom: 20px;">Logo firmy:</div>
-        <input type="file">
+        <input type="file" id="file">
         <div style="grid-row: 11; grid-column-start: span 2; display:flex; justify-content: center;">
             <div class="oferta" style="margin-top: 0px;">
-                <div class="logo"><img src="~/obrazki/gaben.png"></div>
+                <div class="logo"><img id="img" style="width: 100%; height: 100%;"></div>
                 <div class="workcontent">
                     <div class="worktitle" data-bind="text: jobTitle"></div>
                     <div class="firma" data-bind="text: company"></div>
@@ -69,8 +69,21 @@
 <script>
     var info = @Model;
     var uri;
+    var fileData = "";
+    var fileName = "";
     if (info == 0) uri = '@Startup.Configuration["ApiAddress"]' + '/api/JobOffers';
     else uri = '@Startup.Configuration["ApiAddress"]' + '/api/JobOffers/' + info;
+    const inputElement = document.getElementById("file");
+    inputElement.addEventListener("change", loadFile, false);
+
+    function loadFile() {
+        var reader = new FileReader();
+        reader.onload = function () {
+            fileData = reader.result;
+            document.getElementById("img").src = reader.result;
+        };
+        reader.readAsDataURL(document.getElementById("file").files[0]);
+    }
 
     var companiesRequest = $.ajax({
         url: '@Startup.Configuration["ApiAddress"]' + '/api/Companies',
@@ -110,6 +123,9 @@
                 document.getElementById("position").setAttribute('value', data.position);
                 document.getElementById("salaryFrom").setAttribute('value', data.salaryFrom);
                 document.getElementById("city").setAttribute('value', data.city);
+                document.getElementById("img").src = data.fileData;
+                fileName = data.fileName;
+                fileData = data.fileData;
                 ko.applyBindings(new AppViewModel());
             });
         }
@@ -164,6 +180,13 @@
         var company = document.getElementById("companies");
         var companyId = company.value;
         var companyName = company.options[company.selectedIndex].text;
+        if (typeof (document.getElementById("file").files[0]) != 'undefined') {
+            fileName = document.getElementById("file").files[0].name;
+        }
+        else {
+            fileName = "";
+            fileData = "";
+        }
         $.ajax({
             url: uri,
             type: 'POST',
@@ -178,7 +201,10 @@
                     id: companyId,
                     name: companyName
                 },
-                hr: '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
+                hr: '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value',
+                fileData: fileData,
+                fileName: fileName
+
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Dodano ofertę!"); },
@@ -196,6 +222,9 @@
         var company = document.getElementById("companies");
         var companyId = company.value;
         var companyName = company.options[company.selectedIndex].text;
+        if (typeof (document.getElementById("file").files[0]) != 'undefined') {
+            fileName = document.getElementById("file").files[0].name;
+        }
         $.ajax({
             url: uri,
             type: 'PUT',
@@ -211,7 +240,9 @@
                     id: companyId,
                     name: companyName
                 },
-                hr: '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
+                hr: '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value',
+                fileData: fileData,
+                fileName: fileName
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Zmieniono ofertę!"); },

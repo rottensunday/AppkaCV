@@ -119,20 +119,6 @@ namespace Appka_CV.Controllers
             return View(id);
         }
 
-        [HttpPost]
-        public IActionResult DeleteCompany(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                CompaniesRepository.DeleteCompany(id);
-                return RedirectToAction("ListCompanies");
-            }
-            else
-            {
-                return View("ListCompanies");
-            }
-        }
-
         public void AddUser(string objectId)
         {
             Task<AuthenticationResult> result = authContext.AcquireTokenAsync("https://graph.windows.net", credential);

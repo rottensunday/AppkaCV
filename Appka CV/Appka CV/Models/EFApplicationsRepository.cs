@@ -26,7 +26,8 @@ namespace Appka_CV.Models
                     applicationEntry.Accepted = application.Accepted;
                     applicationEntry.Address = application.Address;
                     applicationEntry.EmailAddress = application.EmailAddress;
-                    applicationEntry.FirstFile = application.FirstFile;
+                    applicationEntry.FileName = application.FileName;
+                    applicationEntry.FileData = application.FileData;
                     applicationEntry.FirstName = application.FirstName;
                     applicationEntry.Hobbies = application.Hobbies;
                     applicationEntry.Id = application.Id;
@@ -34,9 +35,7 @@ namespace Appka_CV.Models
                     applicationEntry.Languages = application.Languages;
                     applicationEntry.LastName = application.LastName;
                     applicationEntry.PhoneNumber = application.PhoneNumber;
-                    applicationEntry.SecondFile = application.SecondFile;
                     applicationEntry.Skills = application.Skills;
-                    applicationEntry.ThirdFile = application.ThirdFile;
                     applicationEntry.Education = application.Education;
                     applicationEntry.User = application.User;
 
@@ -48,7 +47,7 @@ namespace Appka_CV.Models
         public JobApplication DeleteApplication(int applicationId)
         {
             JobApplication applicationEntry = context.JobApplications.FirstOrDefault(x => x.Id == applicationId);
-            if(applicationEntry != null)
+            if (applicationEntry != null)
             {
                 context.JobApplications.Remove(applicationEntry);
                 context.SaveChanges();

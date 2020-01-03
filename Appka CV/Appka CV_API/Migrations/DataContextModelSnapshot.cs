@@ -55,7 +55,7 @@ namespace Appka_CV_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstFile")
+                    b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -79,13 +79,7 @@ namespace Appka_CV_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SecondFile")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Skills")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ThirdFile")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("User")
@@ -117,10 +111,10 @@ namespace Appka_CV_API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HR")
+                    b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageFile")
+                    b.Property<string>("HR")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobTitle")

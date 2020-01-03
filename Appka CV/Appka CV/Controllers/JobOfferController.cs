@@ -33,22 +33,5 @@ namespace Appka_CV.Controllers
         {
             return View(id);
         }
-
-        [Authorize(Policy = "HROnly")]
-        [HttpPost]
-        public IActionResult AddOffer(JobOfferViewModel offerModel)
-        {
-            if (ModelState.IsValid)
-            {
-                JobOffer offer = offerModel.JobOffer;
-                offer.Company = CompaniesRepository.Companies.Where(x => x.Id == offerModel.SelectedCompany).FirstOrDefault();
-                JobOffersRepository.SaveOffer(offer);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(offerModel);
-            }
-        }
     }
 }

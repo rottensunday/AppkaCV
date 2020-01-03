@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Appka_CV_API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.IO;
 
 namespace Appka_CV_API.Controllers
 {
@@ -61,6 +64,28 @@ namespace Appka_CV_API.Controllers
                 result = result.Where(x => x.JobOffer.HR == email);
             }
 
+            string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+            CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+            CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+            var container = serviceClient.GetContainerReference("myblobson");
+            foreach (var application in result)
+            {
+                if (!string.IsNullOrEmpty(application.FileName))
+                {
+                    CloudBlockBlob blob = container.GetBlockBlobReference(application.FileName);
+                    string file;
+                    using (var stream = new MemoryStream())
+                    {
+                        blob.DownloadToStreamAsync(stream).Wait();
+                        string input = Convert.ToBase64String(stream.ToArray());
+                        file = "data:application/pdf"
+                                + ";base64,"
+                                + input;
+                    }
+                    application.FileData = file;
+                }
+            }
+
             return result.Skip((pageNo - 1) * pageSize)
                 .Take(pageSize);
         }
@@ -114,12 +139,52 @@ namespace Appka_CV_API.Controllers
         [HttpGet("{id}")]
         public JobApplication GetApplication(int id)
         {
-            return applicationsRepository.JobApplications.Include(x => x.JobOffer).Include(x => x.JobOffer.Company).FirstOrDefault(x => x.Id == id);
+            JobApplication application = applicationsRepository.JobApplications.Include(x => x.JobOffer).Include(x => x.JobOffer.Company).FirstOrDefault(x => x.Id == id);
+            if (!string.IsNullOrEmpty(application.FileName))
+            {
+                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+                CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+                CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+                var container = serviceClient.GetContainerReference("myblobson");
+                CloudBlockBlob blob = container.GetBlockBlobReference(application.FileName);
+                string image;
+                using (var stream = new MemoryStream())
+                {
+                    blob.DownloadToStreamAsync(stream).Wait();
+                    string input = Convert.ToBase64String(stream.ToArray());
+                    image = "data:application/pdf"
+                            + ";base64,"
+                            + input;
+                }
+                application.FileData = image;
+            }
+            return application;
         }
 
         [HttpPost]
         public async Task<ActionResult<JobApplication>> PostApplication(JobApplication application)
         {
+            if (!string.IsNullOrEmpty(application.FileName))
+            {
+                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+
+                CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+                CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+                var container = serviceClient.GetContainerReference("myblobson");
+                string extension = Path.GetExtension(application.FileName);
+                string name = DateTime.Now.ToString().Replace(" ", "-").Replace("/", "-").Replace(":", "-").Replace(".", "-") + extension;
+                CloudBlockBlob blob = container.GetBlockBlobReference(name);
+                application.FileName = name;
+                int index = application.FileData.IndexOf(',');
+                string data = application.FileData.Substring(index + 1);
+                data = data.Replace("\\", "\\\\");
+                var bytes = Convert.FromBase64String(data);
+                using (var stream = new MemoryStream(bytes))
+                {
+                    blob.UploadFromStreamAsync(stream).Wait();
+                }
+            }
+
             applicationsRepository.Entry(application.JobOffer).State = EntityState.Unchanged;
             applicationsRepository.JobApplications.Add(application);
             await applicationsRepository.SaveChangesAsync();
@@ -137,6 +202,28 @@ namespace Appka_CV_API.Controllers
 
             applicationsRepository.Entry(application.JobOffer).State = EntityState.Unchanged;
             applicationsRepository.Entry(application).State = EntityState.Modified;
+
+            if (!string.IsNullOrEmpty(application.FileName))
+            {
+                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+
+                CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+                CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+                var container = serviceClient.GetContainerReference("myblobson");
+
+                string extension = Path.GetExtension(application.FileName);
+                string name = DateTime.Now.ToString().Replace(" ", "-").Replace("/", "-").Replace(":", "-").Replace(".", "-") + extension;
+                CloudBlockBlob blob = container.GetBlockBlobReference(name);
+                application.FileName = name;
+                int index = application.FileData.IndexOf(',');
+                string data = application.FileData.Substring(index + 1);
+                data = data.Replace("\\", "\\\\");
+                var bytes = Convert.FromBase64String(data);
+                using (var stream = new MemoryStream(bytes))
+                {
+                    blob.UploadFromStreamAsync(stream).Wait();
+                }
+            }
 
             try
             {
