@@ -76,6 +76,7 @@
     var offerTitle;
     var fileData = "";
     var fileName = "";
+    var accepted;
     const inputElement = document.getElementById("file");
     inputElement.addEventListener("change", loadFile, false);
 
@@ -111,6 +112,7 @@
                 document.getElementById("wyksztalcenie").value = data.education.toLowerCase();
                 document.getElementById("zalaczonyplik").innerHTML = data.fileName;
                 document.getElementById("zalaczonyplik").setAttribute('href', 'https://appkacvstorage.blob.core.windows.net/myblobson/' + data.fileName);
+                accepted = data.accepted;
                 fileName = data.fileName;
                 fileData = data.fileData;
                 offerId = data.jobOffer.id;
@@ -237,7 +239,8 @@
                 education: wyksztalcenie,
                 user: '@User.Claims.FirstOrDefault(x => x.Type == "emails").Value',
                 fileName: fileName,
-                fileData: fileData
+                fileData: fileData,
+                accepted: accepted
             }),
             contentType: 'application/json; charset=utf-8',
             success: function(result) { window.alert("Zmieniono aplikację!"); },

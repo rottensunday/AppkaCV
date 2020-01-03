@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.IO;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace Appka_CV_API.Controllers
 {
@@ -164,6 +166,7 @@ namespace Appka_CV_API.Controllers
         [HttpPost]
         public async Task<ActionResult<JobApplication>> PostApplication(JobApplication application)
         {
+            
             if (!string.IsNullOrEmpty(application.FileName))
             {
                 string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
@@ -187,8 +190,55 @@ namespace Appka_CV_API.Controllers
 
             applicationsRepository.Entry(application.JobOffer).State = EntityState.Unchanged;
             applicationsRepository.JobApplications.Add(application);
-            await applicationsRepository.SaveChangesAsync();
+            applicationsRepository.SaveChangesAsync().Wait();
+            applicationsRepository.Entry(application.JobOffer).State = EntityState.Detached;
+            JobOffer offer = applicationsRepository.JobOffers.FirstOrDefault(x => x.Id == application.JobOffer.Id);
+            string hr = offer.HR;
 
+
+
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("arnachimm@gmail.com", "Appka CV"),
+                Subject = "Dodano nową aplikację na Twoją ofertę!",
+                PlainTextContent = "Witaj, " + hr + "! Dodano nową aplikację na Twoją ofertę pracy: " +
+                application.JobOffer.JobTitle + " od użytkownika " + application.User,
+                HtmlContent = "Witaj, " + hr + "! Dodano nową aplikację na Twoją ofertę pracy: " +
+                application.JobOffer.JobTitle + " od użytkownika " + application.User
+            };
+            msg.AddTo(new EmailAddress(hr, "HR"));
+            var response = await client.SendEmailAsync(msg);
+
+
+            return CreatedAtAction(nameof(GetApplication), new { id = application.Id }, application);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<ActionResult> AcceptApplication(int id)
+        {
+            JobApplication application = applicationsRepository.JobApplications.Include(x => x.JobOffer).FirstOrDefault(x => x.Id == id);
+            if (application == null) return BadRequest();
+            applicationsRepository.Entry(application.JobOffer).State = EntityState.Unchanged;
+            applicationsRepository.Entry(application).State = EntityState.Modified;
+            application.Accepted = true;
+            try
+            {
+                await applicationsRepository.SaveChangesAsync();
+            }
+
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!applicationsRepository.JobApplications.Any(c => c.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
             return CreatedAtAction(nameof(GetApplication), new { id = application.Id }, application);
         }
 

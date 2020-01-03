@@ -56,6 +56,7 @@
     var firstName = "";
     var lastName = "";
     @{ string userType = @User.HasClaim(x => x.Type == "extension_IsHR" && x.Value == "true") ? "HR" : @User.HasClaim(x => x.Type == "extension_IsAdmin" && x.Value == "true") ? "Admin" : "User"; }
+    var buttons;
     var userType = '@userType'
     var email = '@User.Claims.FirstOrDefault(x => x.Type == "emails")?.Value'
     var request = $.ajax({
@@ -189,10 +190,47 @@
         });
     }
 
+    function acceptCV(id) {
+        $.ajax({
+            url: uri + '/' + id,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (data) {
+            $('.applicationBtns.' + id.toString())[0].innerHTML = '<p style="color: green; ">Zaakceptowane</p>';
+        });
+    }
 
     function loadData(item) {
         var result;
+        var buttons;
+        var fileName = "";
+        var link = "";
+        if (item.fileName != "") {
+            fileName = item.fileName;
+            link = 'https://appkacvstorage.blob.core.windows.net/myblobson/' + fileName;
+        }
+
         var insertVal = userType != "Admin" ? "onclick = \"myFunction1(" + item.id + "," + (300000 + item.id) + ") \"" : " ";
+        if (userType == "User") {
+            if (item.accepted) {
+                buttons = `<p style="color: green;">Zaakceptowane</p>
+                           <a class="firmamodyfikuj" style="cursor: pointer; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
+                           <button class="firmausun" style="cursor: pointer;" onClick="deleteItem(` + item.id + `)">Usuń</button>`
+            }
+            else {
+                buttons = ` <a class="firmamodyfikuj" style="cursor: pointer; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
+                            <button class="firmausun" style="cursor: pointer;" onClick="deleteItem(` + item.id + `)">Usuń</button>`
+            }
+
+        }
+        else if (userType == "HR") {
+            if (item.accepted) {
+                buttons = `<p style="color: green;">Zaakceptowane</p>`;
+            }
+            else {
+                buttons = `<a class="firmamodyfikuj changebutton" style="cursor: pointer; grid-row: 11; grid-column: 3; right: 0px; bottom: 0px; padding: 0px;" onClick="acceptCV(` + item.id + `)">Akceptuj</a>`
+            }
+}
         result = `<div class="cv ` + item.id + `">
                     <div class="cvtitle">CV</div>
                     <div class="cvsummary">
@@ -228,14 +266,13 @@
                         <div class="adres" style="grid-row: 8;">Numer telefonu:</div>
                         <div class="adrestext" style="margin-left: 60px; width: 500px; grid-row: 8;">` + item.phoneNumber + `</div>
                         <div class="cvline2" style="grid-row: 9"></div>
-                        <div class="zalaczonepliki" style="grid-row: 10;">Załączone pliki:</div>
-                        <div class="zalaczoneplikicontent" style="grid-row: 11;">
-                            <div class="zalaczonyplik">1. jeden.pdf</div>
-                            <div class="zalaczonyplik">2. dwa.jpg</div>
-                            <div class="zalaczonyplik">3. teksty.pdf</div>
+                        <div class="zalaczonepliki" style="grid-row: 10;">Załączony plik:</div>
+                        <div class="zalaczoneplikicontent" style="grid-row: 11; margin-bottom: 0px;">
+                            <a class="zalaczonyplik" id="zalaczonyplik" href=` + link + ` download>` + fileName +`</a>
                         </div>
-                        <a class="firmamodyfikuj changebutton" style="grid-row: 11; grid-column: 3; right: 0px; bottom: 0px; padding: 0px;" href="` + changeUri + `/` + item.id + `">Zmień</a>
-                        <button class="deletebutton firmausun" style="cursor: pointer; grid-row: 11; grid-column:3;" onClick="deleteItem(` + item.id + `)">Usuń</button>
+                        <div class="applicationBtns ` + item.id + `" style="grid-row: 11; grid-column: 3">
+                            ` + buttons + `
+                        </div>
                     </div>
             `;
         return result;

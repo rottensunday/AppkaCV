@@ -118,4 +118,5 @@ D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Debug\netcoreapp3.0
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Debug\netcoreapp3.0\Appka CV_API.pdb
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Debug\netcoreapp3.0\Appka CV_API.csprojAssemblyReference.cache
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Debug\netcoreapp3.0\Microsoft.WindowsAzure.Storage.dll
+D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Debug\netcoreapp3.0\SendGrid.dll
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Debug\netcoreapp3.0\Appka CV_API.MvcApplicationPartsAssemblyInfo.cache
