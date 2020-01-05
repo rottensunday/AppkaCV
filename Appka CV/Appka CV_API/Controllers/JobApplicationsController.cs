@@ -10,6 +10,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System.IO;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Microsoft.Extensions.Configuration;
 
 namespace Appka_CV_API.Controllers
 {
@@ -18,9 +19,11 @@ namespace Appka_CV_API.Controllers
     public class JobApplicationsController : ControllerBase
     {
         private DataContext applicationsRepository;
-        public JobApplicationsController(DataContext repo1)
+        private IConfiguration Configuration { get; set; }
+        public JobApplicationsController(DataContext repo1, IConfiguration config)
         {
             applicationsRepository = repo1;
+            Configuration = config;
         }
 
         [HttpGet]
@@ -66,7 +69,7 @@ namespace Appka_CV_API.Controllers
                 result = result.Where(x => x.JobOffer.HR == email);
             }
 
-            string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+            string connectionString = Configuration["AzureStorage"];
             CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
             CloudBlobClient serviceClient = account.CreateCloudBlobClient();
             var container = serviceClient.GetContainerReference("myblobson");
@@ -144,7 +147,7 @@ namespace Appka_CV_API.Controllers
             JobApplication application = applicationsRepository.JobApplications.Include(x => x.JobOffer).Include(x => x.JobOffer.Company).FirstOrDefault(x => x.Id == id);
             if (!string.IsNullOrEmpty(application.FileName))
             {
-                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+                string connectionString = Configuration["AzureStorage"];
                 CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
                 CloudBlobClient serviceClient = account.CreateCloudBlobClient();
                 var container = serviceClient.GetContainerReference("myblobson");
@@ -166,10 +169,10 @@ namespace Appka_CV_API.Controllers
         [HttpPost]
         public async Task<ActionResult<JobApplication>> PostApplication(JobApplication application)
         {
-            
+            if (application == null) return BadRequest();
             if (!string.IsNullOrEmpty(application.FileName))
             {
-                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+                string connectionString = Configuration["AzureStorage"];
 
                 CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
                 CloudBlobClient serviceClient = account.CreateCloudBlobClient();
@@ -195,9 +198,7 @@ namespace Appka_CV_API.Controllers
             JobOffer offer = applicationsRepository.JobOffers.FirstOrDefault(x => x.Id == application.JobOffer.Id);
             string hr = offer.HR;
 
-
-
-            var apiKey = "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";
+            var apiKey = Configuration["SendgridAPI"];
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
@@ -245,6 +246,10 @@ namespace Appka_CV_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutApplication(int id, JobApplication application)
         {
+            if (application == null)
+            {
+                return BadRequest();
+            }
             if (id != application.Id)
             {
                 return BadRequest();
@@ -255,8 +260,7 @@ namespace Appka_CV_API.Controllers
 
             if (!string.IsNullOrEmpty(application.FileName))
             {
-                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
-
+                string connectionString = Configuration["AzureStorage"];
                 CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
                 CloudBlobClient serviceClient = account.CreateCloudBlobClient();
                 var container = serviceClient.GetContainerReference("myblobson");

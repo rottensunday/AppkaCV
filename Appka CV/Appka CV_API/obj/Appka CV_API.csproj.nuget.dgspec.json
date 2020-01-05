@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {}
+    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {}
   },
   "projects": {
-    "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {
+    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
+        "projectUniqueName": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
         "projectName": "Appka CV_API",
-        "projectPath": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
+        "projectPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\Appka CV_API.csproj",
         "packagesPath": "C:\\Users\\rotten\\.nuget\\packages\\",
-        "outputPath": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\obj\\",
+        "outputPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -75,13 +75,25 @@
               "target": "Package",
               "version": "[3.1.0-preview2.19525.4, )"
             },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[1.1.4, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.0-preview2.19553.1, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.13.1, )"
+            },
             "Sendgrid": {
               "target": "Package",
               "version": "[9.12.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.0-rc5, )"
             },
             "WindowsAzure.Storage": {
               "target": "Package",

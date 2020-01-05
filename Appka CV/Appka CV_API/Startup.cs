@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.EntityFrameworkCore;
 using Appka_CV_API.Models;
+using Microsoft.OpenApi.Models;
 
 namespace Appka_CV_API
 {
@@ -28,12 +29,14 @@ namespace Appka_CV_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["DatabaseConnectionString"]));
             services.AddCors();
-            services.AddTransient<EFCompaniesRepository>();
-            services.AddTransient<EFJobOffersRepository>();
-            services.AddTransient<EFApplicationsRepository>();
             services.AddControllers().AddNewtonsoftJson();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "APPKA_CV_API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +46,12 @@ namespace Appka_CV_API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "APPKA_CV_API v1");
+            });
 
             app.UseHttpsRedirection();
 

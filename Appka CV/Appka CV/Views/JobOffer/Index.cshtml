@@ -198,7 +198,7 @@
             @:result += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: rgb(181, 190, 50);" href="' + addUri + '/' + item.id + '">Zmień</a>';
             @:}
         }
-        @if (User.HasClaim(claim => claim.Type == "extension_IsHR" && claim.Value == "false") && User.HasClaim(claim => claim.Type == "extension_IsAdmin" && claim.Value == "false"))
+        @if (User.Identity.IsAuthenticated && !(User.HasClaim(claim => claim.Type == "extension_IsHR" && claim.Value == "true") || User.HasClaim(claim => claim.Type == "extension_IsAdmin" && claim.Value == "true")))
         {
             @:if (item.hasApplied) {
             @:   result += '<a class="firmamodyfikuj" style="width: 120px; bottom: 10px; background: green;" href="' + applicationUri + '/' + item.applicationId + '">Zmień CV</button>';

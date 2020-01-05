@@ -33,6 +33,23 @@ namespace Appka_CV_API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Microsoft"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Samsung"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Politechnika"
+                        });
                 });
 
             modelBuilder.Entity("Appka_CV_API.Models.JobApplication", b =>
@@ -90,6 +107,93 @@ namespace Appka_CV_API.Migrations
                     b.HasIndex("JobOfferId");
 
                     b.ToTable("JobApplications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Accepted = false,
+                            Address = "Warszawa",
+                            Education = "Średnie",
+                            EmailAddress = "mailik@mailons.com",
+                            FileName = "03-01-2020-02-47-14.pdf",
+                            FirstName = "Marian",
+                            Hobbies = "Latanie i pływanie",
+                            JobOfferId = 3,
+                            Languages = "Polski i inne też umiem",
+                            LastName = "Kowalski",
+                            PhoneNumber = "919212517",
+                            Skills = "Umiem piec chleb i pisać dobry kod",
+                            User = "dmw57033@zzrgg.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Accepted = false,
+                            Address = "Warszawa",
+                            Education = "Wyższe",
+                            EmailAddress = "mailik@mailons.com",
+                            FileName = "03-01-2020-02-47-14.pdf",
+                            FirstName = "Krzysztof",
+                            Hobbies = "Latanie i pływanie",
+                            JobOfferId = 1,
+                            Languages = "Polski i inne też umiem",
+                            LastName = "Rębacz",
+                            PhoneNumber = "919212517",
+                            Skills = "Umiem piec chleb i pisać dobry kod",
+                            User = "dmw57033@zzrgg.com"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Accepted = false,
+                            Address = "Warszawa",
+                            Education = "Średnie",
+                            EmailAddress = "mailik@mailons.com",
+                            FileName = "03-01-2020-02-47-14.pdf",
+                            FirstName = "Marian",
+                            Hobbies = "Latanie i pływanie",
+                            JobOfferId = 2,
+                            Languages = "Polski i inne też umiem",
+                            LastName = "Kowalski",
+                            PhoneNumber = "919212517",
+                            Skills = "Umiem piec chleb i pisać dobry kod",
+                            User = "dmw57033@zzrgg.com"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Accepted = false,
+                            Address = "Warszawa",
+                            Education = "Średnie",
+                            EmailAddress = "mailik@mailons.com",
+                            FileName = "03-01-2020-02-47-14.pdf",
+                            FirstName = "Wiesiek",
+                            Hobbies = "Latanie i pływanie",
+                            JobOfferId = 1,
+                            Languages = "Polski i inne też umiem",
+                            LastName = "Wojecki",
+                            PhoneNumber = "919212517",
+                            Skills = "Umiem piec chleb i pisać dobry kod",
+                            User = "d10052011@urhen.com"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Accepted = false,
+                            Address = "Warszawa",
+                            Education = "Średnie",
+                            EmailAddress = "mailik@mailons.com",
+                            FileName = "03-01-2020-02-47-14.pdf",
+                            FirstName = "Wiesiek",
+                            Hobbies = "Latanie i pływanie",
+                            JobOfferId = 2,
+                            Languages = "Polski i inne też umiem",
+                            LastName = "Wojecki",
+                            PhoneNumber = "919212517",
+                            Skills = "Umiem piec chleb i pisać dobry kod",
+                            User = "zyw93775@bcaoo.com"
+                        });
                 });
 
             modelBuilder.Entity("Appka_CV_API.Models.JobOffer", b =>
@@ -127,14 +231,65 @@ namespace Appka_CV_API.Migrations
                     b.Property<string>("SalaryFrom")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalaryTo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
                     b.ToTable("JobOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Category = "Programista",
+                            City = "Warszawa",
+                            CompanyId = 1,
+                            Description = "Superancka oferta pracy dla seniora w .net",
+                            FileName = "22.jpg",
+                            HR = "zrl67373@bcaoo.com",
+                            JobTitle = "Praca dla programisty",
+                            Position = "Senior",
+                            SalaryFrom = "15000"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Category = "Piekarz",
+                            City = "Zakopane",
+                            CompanyId = 3,
+                            Description = "Superancka oferta pracy dla zdolnego piekarza (bułeczki oraz chlebki)",
+                            FileName = "22.jpg",
+                            HR = "zrl67373@bcaoo.com",
+                            JobTitle = "Praca dla piekarza",
+                            Position = "Praktyki",
+                            SalaryFrom = "2000"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Category = "Barman",
+                            City = "Warszawa",
+                            CompanyId = 3,
+                            Description = "Superancka oferta pracy dla wybitnego barmana",
+                            FileName = "22.jpg",
+                            HR = "oob23573@zzrgg.com",
+                            JobTitle = "Praca dla barmana",
+                            Position = "Pełen etat",
+                            SalaryFrom = "5000"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Category = "Programista",
+                            City = "Warszawa",
+                            CompanyId = 2,
+                            Description = "Nudna praca dla programisty java",
+                            FileName = "22.jpg",
+                            HR = "oob23573@zzrgg.com",
+                            JobTitle = "Praca dla developera java",
+                            Position = "Mid",
+                            SalaryFrom = "5000"
+                        });
                 });
 
             modelBuilder.Entity("Appka_CV_API.Models.JobApplication", b =>

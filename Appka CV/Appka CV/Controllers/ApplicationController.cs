@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Appka_CV.Models;
-using Appka_CV.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Appka_CV.Controllers

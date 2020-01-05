@@ -29,11 +29,9 @@ namespace Appka_CV.Models
                     offerEntry.Description = offer.Description;
                     offerEntry.Id = offer.Id;
                     offerEntry.FileData = offer.FileData;
-                    offerEntry.jobApplications = offer.jobApplications;
                     offerEntry.JobTitle = offer.JobTitle;
                     offerEntry.Position = offer.Position;
                     offerEntry.SalaryFrom = offer.SalaryFrom;
-                    offerEntry.SalaryTo = offer.SalaryTo;
                 }
             }
 
@@ -59,7 +57,7 @@ namespace Appka_CV.Models
                 JobOffer offerEntry = context.JobOffers.FirstOrDefault(x => x.Id == offer.Id);
                 if (offerEntry != null)
                 {
-                    offerEntry.jobApplications.Add(application);
+                //    offerEntry.jobApplications.Add(application);
                 }
             }
 

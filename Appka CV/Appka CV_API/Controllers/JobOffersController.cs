@@ -9,6 +9,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage;
 using System.Text.RegularExpressions;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace Appka_CV_API.Controllers
 {
@@ -17,9 +18,11 @@ namespace Appka_CV_API.Controllers
     public class JobOffersController : ControllerBase
     {
         private DataContext offersRepository;
-        public JobOffersController(DataContext repo1)
+        private IConfiguration Configuration { get; set; }
+        public JobOffersController(DataContext repo1, IConfiguration config)
         {
             offersRepository = repo1;
+            Configuration = config;
         }
 
         [HttpGet]
@@ -60,7 +63,7 @@ namespace Appka_CV_API.Controllers
                 else offer.HasApplied = false;
             }
 
-            string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+            string connectionString = Configuration["AzureStorage"];
             CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
             CloudBlobClient serviceClient = account.CreateCloudBlobClient();
             var container = serviceClient.GetContainerReference("myblobson");
@@ -88,7 +91,7 @@ namespace Appka_CV_API.Controllers
         }
 
         [HttpGet("JobOffersCount")]
-        public int GetJobApplicationsCount(string filter, string category, string position,
+        public int GetJobOffersCount(string filter, string category, string position,
             string city)
         {
             IQueryable<JobOffer> result = from s in offersRepository.
@@ -121,7 +124,7 @@ namespace Appka_CV_API.Controllers
             JobOffer offer = offersRepository.JobOffers.Include(x => x.Company).FirstOrDefault(x => x.Id == id);
             if (!string.IsNullOrEmpty(offer.FileName))
             {
-                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+                string connectionString = Configuration["AzureStorage"];
                 CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
                 CloudBlobClient serviceClient = account.CreateCloudBlobClient();
                 var container = serviceClient.GetContainerReference("myblobson");
@@ -145,11 +148,11 @@ namespace Appka_CV_API.Controllers
         [HttpPost]
         public async Task<ActionResult<JobOffer>> PostOffer(JobOffer offer)
         {
-
+            if (offer == null) return BadRequest();
 
             if(!string.IsNullOrEmpty(offer.FileName))
             {
-                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+                string connectionString = Configuration["AzureStorage"];
 
                 CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
                 CloudBlobClient serviceClient = account.CreateCloudBlobClient();
@@ -191,7 +194,7 @@ namespace Appka_CV_API.Controllers
 
             if (!string.IsNullOrEmpty(offer.FileName))
             {
-                string connectionString = "DefaultEndpointsProtocol=https;AccountName=appkacvstorage;AccountKey=1F5gXDzX5zatwbVzvCisref6iHMqZlHl40txPt/O6Z+Lp0qXJ23/aulzauz3TCQEcLCHkxuXLyWRCSPaTHh4Jg==;EndpointSuffix=core.windows.net";
+                string connectionString = Configuration["AzureStorage"];
 
                 CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
                 CloudBlobClient serviceClient = account.CreateCloudBlobClient();

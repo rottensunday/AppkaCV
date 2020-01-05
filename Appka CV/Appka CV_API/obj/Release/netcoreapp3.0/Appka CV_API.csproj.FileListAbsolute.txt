@@ -119,3 +119,12 @@ D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3.0\Appka CV_API.pdb
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3.0\Appka CV_API.csprojAssemblyReference.cache
 D:\NAUKA\source\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Microsoft.WindowsAzure.Storage.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Castle.Core.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Microsoft.OpenApi.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Moq.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\SendGrid.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\bin\Release\netcoreapp3.0\Microsoft.WindowsAzure.Storage.dll
+D:\Nauka\repos\AppkaCVRepo2\Appka CV\Appka CV_API\obj\Release\netcoreapp3.0\Appka CV_API.MvcApplicationPartsAssemblyInfo.cs

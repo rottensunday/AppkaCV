@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appka CV", "Appka CV\Appka CV.csproj", "{69201EA8-7515-45DA-81A8-2E9AEDFF7EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appka CV_API", "Appka CV_API\Appka CV_API.csproj", "{01713B36-8A30-4D1E-B953-C415234F3DCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appka CV_API", "Appka CV_API\Appka CV_API.csproj", "{01713B36-8A30-4D1E-B953-C415234F3DCD}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "DeployTests", "DeployTests\DeployTests.deployproj", "{60BC4AAC-17E9-4CF8-B6FB-6BA6BFC0231F}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Deployment", "Deployment\Deployment.deployproj", "{BECA3391-5B63-4A0D-857A-1D2A8F554AC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{01713B36-8A30-4D1E-B953-C415234F3DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01713B36-8A30-4D1E-B953-C415234F3DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01713B36-8A30-4D1E-B953-C415234F3DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BC4AAC-17E9-4CF8-B6FB-6BA6BFC0231F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BC4AAC-17E9-4CF8-B6FB-6BA6BFC0231F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BC4AAC-17E9-4CF8-B6FB-6BA6BFC0231F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BC4AAC-17E9-4CF8-B6FB-6BA6BFC0231F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECA3391-5B63-4A0D-857A-1D2A8F554AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECA3391-5B63-4A0D-857A-1D2A8F554AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECA3391-5B63-4A0D-857A-1D2A8F554AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECA3391-5B63-4A0D-857A-1D2A8F554AC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

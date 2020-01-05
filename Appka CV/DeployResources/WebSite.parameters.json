@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hostingPlanName": {
+      "value": "demoHostPlan"
+    },
+    "Appka_CVPackageFileName": {
+      "value": "Appka CV"
+    },
+    "Appka_CVPackageFolder": {
+      "value": "package.zip"
+    },
+    "Appka_CV_APIPackageFolder": { "value": "Appka CV_API" },
+    "Appka_CV_APIPackageFileName": { "value": "package.zip" }
+  }
+}

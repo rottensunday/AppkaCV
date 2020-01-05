@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj": {}
+    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj": {}
   },
   "projects": {
-    "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj": {
+    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj",
+        "projectUniqueName": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj",
         "projectName": "Appka CV",
-        "projectPath": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj",
+        "projectPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj",
         "packagesPath": "C:\\Users\\rotten\\.nuget\\packages\\",
-        "outputPath": "D:\\NAUKA\\source\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\obj\\",
+        "outputPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -80,6 +80,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.13.1, )"
             }
           },
           "imports": [

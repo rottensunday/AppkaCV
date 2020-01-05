@@ -19,10 +19,10 @@ namespace Appka_CV_API.Controllers
         }
 
         [HttpGet]
-        public IQueryable<Company> GetCompanies(string filter, int pageSize = 4, int pageNo = 1)
+        public IQueryable<Company> GetCompanies(string? filter, int pageSize = 4, int pageNo = 1)
         {
             IQueryable<Company> result = from s in companiesRepository.Companies
-                                             select s;
+                                         select s;
             int id;
             bool parsingSuccess = Int32.TryParse(filter, out id);
             if (!String.IsNullOrEmpty(filter))
@@ -30,12 +30,14 @@ namespace Appka_CV_API.Controllers
                 result = result.Where(s => s.Name.Contains(filter) || (parsingSuccess && s.Id == id));
             }
 
+            if (pageSize <= 0) pageSize = 4;
+            if (pageNo <= 0) pageNo = 1;
             return result.Skip((pageNo - 1) * pageSize)
                 .Take(pageSize);
         }
 
         [HttpGet("CompaniesCount")]
-        public int GetCompaniesCount(string filter)
+        public int GetCompaniesCount(string? filter)
         {
             IQueryable<Company> result = from s in companiesRepository.Companies
                                          select s;
@@ -51,12 +53,17 @@ namespace Appka_CV_API.Controllers
         [HttpGet("{id}")]
         public Company GetCompany(int id)
         {
+            if (id < 0) id = 0;
             return companiesRepository.Companies.FirstOrDefault(x => x.Id == id);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Company>> PostCompany(Company company)
+        public async Task<ActionResult<Company>> PostCompany(Company? company)
         {
+            if(company == null)
+            {
+                return BadRequest();
+            }
             companiesRepository.Companies.Add(company);
             await companiesRepository.SaveChangesAsync();
 
@@ -64,9 +71,13 @@ namespace Appka_CV_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(int id, Company company)
+        public async Task<IActionResult> PutCompany(int id, Company? company)
         {
-            if(id != company.Id)
+            if(company == null)
+            {
+                return BadRequest();
+            }
+            if (id != company.Id)
             {
                 return BadRequest();
             }

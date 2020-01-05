@@ -22,10 +22,8 @@ namespace Appka_CV_API.Models
         public string Address { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
-        //[RegularExpression(@"^.*@.*$")]
         [Required]
         public string EmailAddress { get; set; }
-        //public bool ContactAgreement { get; set; }
         public bool Accepted { get; set; }
         public string FileName { get; set; }
         [NotMapped]
