@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj": {}
+    "D:\\NAUKA\\source\\repos\\Nowy folder\\Appka CV\\Appka CV\\Appka CV.csproj": {}
   },
   "projects": {
-    "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj": {
+    "D:\\NAUKA\\source\\repos\\Nowy folder\\Appka CV\\Appka CV\\Appka CV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj",
+        "projectUniqueName": "D:\\NAUKA\\source\\repos\\Nowy folder\\Appka CV\\Appka CV\\Appka CV.csproj",
         "projectName": "Appka CV",
-        "projectPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\Appka CV.csproj",
+        "projectPath": "D:\\NAUKA\\source\\repos\\Nowy folder\\Appka CV\\Appka CV\\Appka CV.csproj",
         "packagesPath": "C:\\Users\\rotten\\.nuget\\packages\\",
-        "outputPath": "D:\\Nauka\\repos\\AppkaCVRepo2\\Appka CV\\Appka CV\\obj\\",
+        "outputPath": "D:\\NAUKA\\source\\repos\\Nowy folder\\Appka CV\\Appka CV\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
