@@ -103,7 +103,7 @@ namespace Appka_CV_API.Models
                     EmailAddress = "mailik@mailons.com",
                     Accepted = false,
                     User = "dmw57033@zzrgg.com",
-                    FileName = "03-01-2020-02-47-14.pdf"
+                    FileName = "Rysunek12344.pdf"
                 },
                 new
                 {
@@ -120,7 +120,7 @@ namespace Appka_CV_API.Models
                     EmailAddress = "mailik@mailons.com",
                     Accepted = false,
                     User = "dmw57033@zzrgg.com",
-                    FileName = "03-01-2020-02-47-14.pdf"
+                    FileName = "Rysunek12344.pdf"
                 },
                 new
                 {
@@ -137,7 +137,7 @@ namespace Appka_CV_API.Models
                     EmailAddress = "mailik@mailons.com",
                     Accepted = false,
                     User = "dmw57033@zzrgg.com",
-                    FileName = "03-01-2020-02-47-14.pdf"
+                    FileName = "Rysunek12344.pdf"
                 },
                 new
                 {
@@ -154,7 +154,7 @@ namespace Appka_CV_API.Models
                     EmailAddress = "mailik@mailons.com",
                     Accepted = false,
                     User = "d10052011@urhen.com",
-                    FileName = "03-01-2020-02-47-14.pdf"
+                    FileName = "Rysunek12344.pdf"
                 },
                 new
                 {
@@ -171,7 +171,7 @@ namespace Appka_CV_API.Models
                     EmailAddress = "mailik@mailons.com",
                     Accepted = false,
                     User = "zyw93775@bcaoo.com",
-                    FileName = "03-01-2020-02-47-14.pdf"
+                    FileName = "Rysunek12344.pdf"
                 }
             );
         }
